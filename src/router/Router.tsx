@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 
-import { EPages } from '@src/types/enums/EPages';
+import EPages from '@src/types/enums/EPages';
 
 import Layout from '@src/components/Layout/Layout';
 import Main from '@src/pages/Main/Main';

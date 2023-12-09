@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import styles from '@src/components/Layout/Layout.module.css';
-import { EPages } from '@src/types/enums/EPages';
+import EPages from '@src/types/enums/EPages';
 
 const TITLE = 'QraphiQL';
 
