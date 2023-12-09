@@ -1,18 +1,26 @@
 import { FC } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import styles from '@src/components/Layout/Layout.module.css';
 import EPages from '@src/types/enums/EPages';
 
-const TITLE = 'QraphiQL';
+import { APP_TITLE } from '@src/constants/global';
+import favicon from '@src/assets/graphql.png';
+import { capitalize } from '@src/utils/StringTransform';
 
 const Layout: FC = (): JSX.Element => {
+  const { pathname } = useLocation();
+  const pageName = capitalize(pathname.slice(1));
+
   return (
-    <>
+    <HelmetProvider>
+      <Helmet title={`${pageName}`} link={[{ rel: 'icon', href: favicon }]} />
+
       <header className={styles.header}>
         <div className={styles.wrapper}>
           <nav className={styles.navigation}>
-            <h1 className={styles.title}>{TITLE}</h1>
+            <h1 className={styles.title}>{APP_TITLE}</h1>
             <NavLink to={EPages.MAIN}>{EPages.MAIN}</NavLink>
             <NavLink to={EPages.WELCOME}>{EPages.WELCOME}</NavLink>
             <NavLink to={EPages.SIGN_IN}>{EPages.SIGN_IN}</NavLink>
@@ -26,7 +34,7 @@ const Layout: FC = (): JSX.Element => {
           <Outlet />
         </div>
       </main>
-    </>
+    </HelmetProvider>
   );
 };
 

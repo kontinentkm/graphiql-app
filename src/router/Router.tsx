@@ -18,7 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Navigate to={EPages.WELCOME} />}></Route>
-      <Route path={EPages.MAIN} element={<Main />}></Route>
+      <Route path={EPages.MAIN} element={<Main />} />
       <Route path={EPages.WELCOME} element={<Welcome />} />
       <Route path={EPages.SIGN_IN} element={<SignIn />} />
       <Route path={EPages.SIGN_UP} element={<SignUp />} />
