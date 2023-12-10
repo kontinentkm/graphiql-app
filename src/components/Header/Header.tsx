@@ -1,5 +1,12 @@
 import { FC } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '@src/hooks/reduxHooks';
+
+import {
+  authorize,
+  selectAuthorization,
+} from '@src/store/AuthorizationSlice/AuthorizationSlice';
 
 import styles from '@src/components/Header/Header.module.css';
 import layout from '@src/components/Layout/Layout.module.css';
@@ -13,6 +20,11 @@ import Toggler from '@src/UI/Toggler/Toggler';
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
 
+  const dispatch = useAppDispatch();
+  const authorized: boolean = useSelector(selectAuthorization);
+
+  const unauthorizeBTNClick = () => dispatch(authorize(false));
+
   return (
     <header className={styles.header}>
       <div className={`${layout.wrapper} ${styles.wrapper}`}>
@@ -20,17 +32,29 @@ const Header: FC = (): JSX.Element => {
 
         <nav className={styles.navigation}>
           <NavLink to={EPages.WELCOME}>{EPages.WELCOME}</NavLink>
-          <NavLink to={EPages.MAIN}>{EPages.MAIN}</NavLink>
+          {authorized && <NavLink to={EPages.MAIN}>{EPages.MAIN}</NavLink>}
         </nav>
 
-        <div className={styles.buttons}>
-          <button type="button" onClick={(): void => navigate(EPages.SIGN_IN)}>
-            Sign In
+        {authorized ? (
+          <button type="button" onClick={unauthorizeBTNClick}>
+            Sign Out
           </button>
-          <button type="button" onClick={(): void => navigate(EPages.SIGN_UP)}>
-            Sign Up
-          </button>
-        </div>
+        ) : (
+          <div className={styles.buttons}>
+            <button
+              type="button"
+              onClick={(): void => navigate(EPages.SIGN_IN)}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={(): void => navigate(EPages.SIGN_UP)}
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
 
         <Toggler
           on="en"

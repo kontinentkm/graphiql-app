@@ -9,6 +9,9 @@ const initialState: IAuthorizationState = {
   token: false, // or null if token is an object
 };
 
+// to save authorization state after page reloading or manually typing URL in search bar
+// it is needed to save the token in LocalStorage or other way and to download it "beforeload" in the initialState above
+
 export const AuthorizationSlice = createSlice({
   name: EReducers.AUTHORIZATION,
   initialState,
