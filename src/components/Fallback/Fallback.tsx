@@ -5,7 +5,7 @@ const FALLBACK_MESSAGE = 'Error occurs!';
 const UNKNOWN_ERROR_MESSAGE = 'Unknown error';
 const BTN_TEXT = 'Reload';
 
-const FallbackUI: FC = (): JSX.Element => {
+const Fallback: FC = (): JSX.Element => {
   const error = useRouteError();
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,4 +31,4 @@ const FallbackUI: FC = (): JSX.Element => {
   );
 };
 
-export default FallbackUI;
+export default Fallback;

@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  background-color: #0000008c;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header a {
+  font-size: 1.8rem;
+}
+
+.navigation {
+  display: flex;
+  gap: 2rem;
+}
+
+.title {
+  margin-right: auto;
+  font-size: 2.2rem;
+  text-wrap: nowrap;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

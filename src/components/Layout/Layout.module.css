@@ -5,30 +5,7 @@
   padding: 1rem;
 }
 
-.header {
-  width: 100%;
-  background-color: #0000008c;
-}
-
-.header a {
-  font-size: 1.8rem;
-  padding: 0 1rem;
-}
-
-.navigation {
-  display: flex;
-  justify-content: end;
-  gap: 1rem;
-  align-items: center;
-}
-
-.title {
-  margin-right: auto;
-  font-size: 2.2rem;
-  text-wrap: nowrap;
-  text-align: center;
-}
-
 .main {
   width: 100%;
+  flex-grow: 1;
 }
