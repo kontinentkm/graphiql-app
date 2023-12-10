@@ -9,6 +9,7 @@ const FallbackUI: FC = (): JSX.Element => {
   const error = useRouteError();
   const location = useLocation();
   const navigate = useNavigate();
+
   let message: string;
 
   if (error instanceof Error) {

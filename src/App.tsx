@@ -1,8 +1,10 @@
 import { RouterProvider } from 'react-router-dom';
 
-import router from '@src/router/Router';
+import useCustomRouter from '@src/router/Router';
 
 function App() {
+  const router = useCustomRouter();
+
   return <RouterProvider router={router} />;
 }
 
