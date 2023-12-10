@@ -6,7 +6,8 @@ const Welcome: FC = (): JSX.Element => {
   if (hasError) throw new SyntaxError();
 
   return (
-    <div>
+    <div style={{ height: '140vh' }}>
+      {/*140vh for sticky header testing */}
       <p>Welcome Page</p>
       <button onClick={() => setHasError(true)}>Throw Error</button>
     </div>

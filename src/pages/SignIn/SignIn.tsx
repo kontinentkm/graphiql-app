@@ -2,19 +2,13 @@ import { FC } from 'react';
 
 // for testing
 import { useAppDispatch } from '@src/hooks/reduxHooks';
-import { useSelector } from 'react-redux';
-import {
-  authorize,
-  selectAuthorization,
-} from '@src/store/AuthorizationSlice/AuthorizationSlice';
+import { authorize } from '@src/store/AuthorizationSlice/AuthorizationSlice';
 //_________________________
 
 const SignIn: FC = (): JSX.Element => {
   // for testing
   const dispatch = useAppDispatch();
-  const authorized = useSelector(selectAuthorization);
   const authorizeBTNClick = () => dispatch(authorize(true));
-  console.log(`Authorized - ${authorized}`);
   //________________________
 
   return (

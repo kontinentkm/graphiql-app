@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@src/hooks/reduxHooks';
@@ -26,14 +26,28 @@ import localizationStrings from '@src/constants/localizationStrings';
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
 
+  // for sticky header
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const dispatch = useAppDispatch();
   const authorized: boolean = useSelector(selectAuthorization);
   const lang: Localization = useSelector(selectLocalization);
 
   const unauthorizeBTNClick = () => dispatch(authorize(false));
 
+  // for sticky header
+  useEffect((): void => {
+    window.addEventListener('scroll', (): void => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    });
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isScrolled ? styles.scroll : ''}`}>
       <div className={`${layout.wrapper} ${styles.wrapper}`}>
         <h1 className={styles.title}>{APP_TITLE}</h1>
 
@@ -68,12 +82,10 @@ const Header: FC = (): JSX.Element => {
         )}
 
         <Toggler
-          on="en"
-          off="ru"
+          on="ru"
+          off="en"
           callback={(value: string): void => {
             dispatch(changeLanguage(value as Localization));
-            // console.log(lang);
-            // console.log(localizationStrings[lang]);
           }}
         />
       </div>
