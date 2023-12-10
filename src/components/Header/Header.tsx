@@ -7,21 +7,28 @@ import {
   authorize,
   selectAuthorization,
 } from '@src/store/AuthorizationSlice/AuthorizationSlice';
+import {
+  selectLocalization,
+  changeLanguage,
+} from '@src/store/LocalizationSlice/LocalizationSlice';
 
 import styles from '@src/components/Header/Header.module.css';
 import layout from '@src/components/Layout/Layout.module.css';
 
 import EPages from '@src/types/enums/EPages';
+import { Localization } from '@src/types/types';
 
 import { APP_TITLE } from '@src/constants/global';
 
 import Toggler from '@src/UI/Toggler/Toggler';
+import localizationStrings from '@src/constants/localizationStrings';
 
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const authorized: boolean = useSelector(selectAuthorization);
+  const lang: Localization = useSelector(selectLocalization);
 
   const unauthorizeBTNClick = () => dispatch(authorize(false));
 
@@ -31,13 +38,17 @@ const Header: FC = (): JSX.Element => {
         <h1 className={styles.title}>{APP_TITLE}</h1>
 
         <nav className={styles.navigation}>
-          <NavLink to={EPages.WELCOME}>{EPages.WELCOME}</NavLink>
-          {authorized && <NavLink to={EPages.MAIN}>{EPages.MAIN}</NavLink>}
+          <NavLink to={EPages.WELCOME}>
+            {localizationStrings[lang].welcome}
+          </NavLink>
+          {authorized && (
+            <NavLink to={EPages.MAIN}>{localizationStrings[lang].main}</NavLink>
+          )}
         </nav>
 
         {authorized ? (
           <button type="button" onClick={unauthorizeBTNClick}>
-            Sign Out
+            {localizationStrings[lang].signOutBtn}
           </button>
         ) : (
           <div className={styles.buttons}>
@@ -45,13 +56,13 @@ const Header: FC = (): JSX.Element => {
               type="button"
               onClick={(): void => navigate(EPages.SIGN_IN)}
             >
-              Sign In
+              {localizationStrings[lang].signInBtn}
             </button>
             <button
               type="button"
               onClick={(): void => navigate(EPages.SIGN_UP)}
             >
-              Sign Up
+              {localizationStrings[lang].signUpBtn}
             </button>
           </div>
         )}
@@ -59,7 +70,11 @@ const Header: FC = (): JSX.Element => {
         <Toggler
           on="en"
           off="ru"
-          callback={(value: string): void => console.log(value)}
+          callback={(value: string): void => {
+            dispatch(changeLanguage(value as Localization));
+            // console.log(lang);
+            // console.log(localizationStrings[lang]);
+          }}
         />
       </div>
     </header>

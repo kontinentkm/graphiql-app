@@ -14,15 +14,15 @@ export const LocalizationSlice = createSlice({
   name: EReducers.LOCALIZATION,
   initialState,
   reducers: {
-    change(state, { payload }: PayloadAction<Localization>) {
+    changeLanguage(state, { payload }: PayloadAction<Localization>) {
       state.language = payload;
     },
   },
 });
 
-export const { change } = LocalizationSlice.actions;
+export const { changeLanguage } = LocalizationSlice.actions;
 
-export const selectAuthorization = (state: RootState): Localization =>
+export const selectLocalization = (state: RootState): Localization =>
   state[EReducers.LOCALIZATION].language;
 
 export default LocalizationSlice.reducer;
