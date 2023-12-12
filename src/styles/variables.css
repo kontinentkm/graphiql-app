@@ -1,0 +1,4 @@
+:root {
+  --header-height: 5.5rem;
+  /*the properties above is necessary for sticky header*/
+}
