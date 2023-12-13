@@ -6,6 +6,8 @@ const localizationStrings: ILocalizationStrings = {
     signUpBtn: 'Sign Up',
     signOutBtn: 'Sing Out',
     welcome: 'Welcome',
+    ourTeam: 'Our Team',
+
     main: 'Main',
   },
   ru: {
@@ -13,6 +15,8 @@ const localizationStrings: ILocalizationStrings = {
     signUpBtn: 'Регистрация',
     signOutBtn: 'Выйти',
     welcome: 'Добро пожаловать',
+    ourTeam: 'Наша команда',
+
     main: 'Главная',
   },
 };

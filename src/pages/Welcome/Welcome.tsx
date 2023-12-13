@@ -1,15 +1,18 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import styles from '@src/pages/Welcome/Welcome.module.css';
+import localizationStrings from '@src/constants/localizationStrings';
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import { Localization } from '@src/types/types';
+import { useSelector } from 'react-redux';
 
 const Welcome: FC = (): JSX.Element => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) throw new SyntaxError();
+  const lang: Localization = useSelector(selectLocalization);
 
   return (
-    <div style={{ height: '140vh' }}>
-      {/*140vh for sticky header testing */}
-      <p>Welcome Page</p>
-      <button onClick={() => setHasError(true)}>Throw Error</button>
+    <div>
+      <p>{localizationStrings[lang].welcome}</p>
+
+      <h2 className={styles.team_title}>{localizationStrings[lang].ourTeam}</h2>
     </div>
   );
 };
