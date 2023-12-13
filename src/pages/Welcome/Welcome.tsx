@@ -28,6 +28,12 @@ const Welcome: FC = (): JSX.Element => {
           </div>
         ))}
       </div>
+      <div className={styles.project_block}>
+        {localizationStrings[lang].project}
+      </div>
+      <div className={styles.course_block}>
+        {localizationStrings[lang].course}
+      </div>
     </div>
   );
 };

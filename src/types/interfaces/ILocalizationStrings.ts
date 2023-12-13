@@ -6,6 +6,9 @@ interface ILocalizationStrings {
     welcome: string;
     ourTeam: string;
     developers: Developer[];
+    project: string;
+    course: string;
+
     main: string;
   };
   ru: {
@@ -15,6 +18,9 @@ interface ILocalizationStrings {
     welcome: string;
     ourTeam: string;
     developers: Developer[];
+    project: string;
+    course: string;
+
     main: string;
   };
 }
