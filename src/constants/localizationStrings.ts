@@ -33,7 +33,7 @@ const localizationStrings: ILocalizationStrings = {
     project_title: 'Project',
     project_text:
       'GraphiQL App is a powerful GraphQL playground and IDE developed by a collaborative team of three skilled developers. This application offers advanced features such as robust authorization, authentication capabilities, and the flexibility to work with any specified open GraphQL endpoint.',
-    course_title: 'Курс',
+    course_title: 'Course',
     course_text:
       'The "RS: React Course" is designed for RS School students, starting from, and new participants with basic programming experience. The curriculum covers the fundamentals of programming languages JavaScript and TypeScript, working with the version control system Git and the GitHub platform, as well as an introduction to modern web development tools such as NPM, Webpack, CSS3, HTML5, Chrome DevTools, and Figma. The course also provides an understanding of REST architecture.',
 
