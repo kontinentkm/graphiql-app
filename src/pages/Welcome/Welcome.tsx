@@ -9,30 +9,44 @@ const Welcome: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
   return (
-    <div>
+    <div className={styles.welcome_container}>
       <p>{localizationStrings[lang].welcome}</p>
       <h2 className={styles.team_title}>{localizationStrings[lang].ourTeam}</h2>
       <div className={styles.team_block}>
         {localizationStrings[lang].developers.map((developer) => (
-          <div key={developer.id} className={styles.developer}>
-            <img src={developer.photo} alt={developer.name} />
-            <h3>{developer.name}</h3>
-            <p>{developer.position}</p>
-            <a
-              href={developer.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {developer.github}
-            </a>
+          <div key={developer.id} className={styles.developer_block}>
+            <div className={styles.developer}>
+              <img
+                className={styles.photo}
+                src={developer.photo}
+                alt={developer.name}
+              />
+              <p className={styles.name}>{developer.name}</p>
+              <p className={styles.position}>{developer.position}</p>
+              <p className={styles.github}>
+                <a
+                  href={developer.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {developer.github}
+                </a>
+              </p>
+            </div>
           </div>
         ))}
       </div>
-      <div className={styles.project_block}>
-        {localizationStrings[lang].project}
+      <div className={styles.project_title}>
+        {localizationStrings[lang].project_title}
       </div>
-      <div className={styles.course_block}>
-        {localizationStrings[lang].course}
+      <div className={styles.project_text}>
+        {localizationStrings[lang].project_text}
+      </div>
+      <div className={styles.course_title}>
+        {localizationStrings[lang].course_title}
+      </div>
+      <div className={styles.course_text}>
+        {localizationStrings[lang].course_text}
       </div>
     </div>
   );

@@ -30,9 +30,11 @@ const localizationStrings: ILocalizationStrings = {
         github: 'https://github.com/hotimpulse',
       },
     ],
-    project:
+    project_title: 'Project',
+    project_text:
       'GraphiQL App is a powerful GraphQL playground and IDE developed by a collaborative team of three skilled developers. This application offers advanced features such as robust authorization, authentication capabilities, and the flexibility to work with any specified open GraphQL endpoint.',
-    course:
+    course_title: 'Курс',
+    course_text:
       'The "RS: React Course" is designed for RS School students, starting from, and new participants with basic programming experience. The curriculum covers the fundamentals of programming languages JavaScript and TypeScript, working with the version control system Git and the GitHub platform, as well as an introduction to modern web development tools such as NPM, Webpack, CSS3, HTML5, Chrome DevTools, and Figma. The course also provides an understanding of REST architecture.',
 
     main: 'Main',
@@ -66,10 +68,11 @@ const localizationStrings: ILocalizationStrings = {
         github: 'https://github.com/hotimpulse',
       },
     ],
-    project:
+    project_title: 'Проект',
+    project_text:
       'GraphiQL App - это мощная песочница и среда разработки для GraphQL, созданная коллективной командой из трех опытных разработчиков. Это приложение предлагает передовые функции, такие как надежная авторизация, возможности аутентификации и гибкость работы с любым указанным открытым конечным пунктом GraphQL.',
-
-    course:
+    course_title: 'Курс',
+    course_text:
       'Курс "RS: React Course" предназначен для студентов RS School, начиная, и новых участников с базовым опытом в программировании. Обучение охватывает основы языков программирования JavaScript и TypeScript, работу с системой контроля версий Git и платформой GitHub, а также знакомство с современными инструментами веб-разработки, такими как NPM, Webpack, CSS3, HTML5, Chrome DevTools и Figma. Курс также предоставляет понимание архитектуры REST.',
     main: 'Главная',
   },

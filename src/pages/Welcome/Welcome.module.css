@@ -1,8 +1,60 @@
+.welcome_container {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  max-width: 1240px;
+}
+
 .team_title {
-  font-size: 3rem;
+  margin-top: 1rem;
+  font-size: 4rem;
+  font-weight: bold;
   text-align: center;
 }
 
 .team_block {
+  margin-top: 3rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: 3rem;
+}
+
+.developer_block {
   display: flex;
+  justify-content: center;
+}
+
+.photo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+
+.name {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.position {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.github {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.project_title,
+.course_title {
+  margin-top: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.project_text,
+.course_text {
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }

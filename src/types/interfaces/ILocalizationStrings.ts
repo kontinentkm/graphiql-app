@@ -6,8 +6,10 @@ interface ILocalizationStrings {
     welcome: string;
     ourTeam: string;
     developers: Developer[];
-    project: string;
-    course: string;
+    project_title: string;
+    project_text: string;
+    course_title: string;
+    course_text: string;
 
     main: string;
   };
@@ -18,8 +20,10 @@ interface ILocalizationStrings {
     welcome: string;
     ourTeam: string;
     developers: Developer[];
-    project: string;
-    course: string;
+    project_title: string;
+    project_text: string;
+    course_title: string;
+    course_text: string;
 
     main: string;
   };
