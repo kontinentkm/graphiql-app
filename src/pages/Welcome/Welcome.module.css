@@ -2,3 +2,7 @@
   font-size: 3rem;
   text-align: center;
 }
+
+.team_block {
+  display: flex;
+}

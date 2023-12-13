@@ -11,8 +11,23 @@ const Welcome: FC = (): JSX.Element => {
   return (
     <div>
       <p>{localizationStrings[lang].welcome}</p>
-
       <h2 className={styles.team_title}>{localizationStrings[lang].ourTeam}</h2>
+      <div className={styles.team_block}>
+        {localizationStrings[lang].developers.map((developer) => (
+          <div key={developer.id} className={styles.developer}>
+            <img src={developer.photo} alt={developer.name} />
+            <h3>{developer.name}</h3>
+            <p>{developer.position}</p>
+            <a
+              href={developer.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {developer.github}
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
