@@ -20,7 +20,7 @@ const Footer: FC = (): JSX.Element => {
         <a href={COURSE_LINK} target="_blank" rel="noreferrer">
           <img className={styles.rss} src={rssImg} alt={RSS_IMG_ALT} />
         </a>
-        <p className={styles.year}>2023</p>
+        <p className={styles.year}>2024</p>
         <div className={styles.githubs}>
           <a href={LEV_GITHUB_LINK} target="_blank" rel="noreferrer">
             <img
