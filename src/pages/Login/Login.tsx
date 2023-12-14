@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import CustomButton from '@src/components/CustomButton/CustomButton.tsx';
 import { useNavigate } from 'react-router-dom';
 import { auth, logInWithEmailAndPassword } from '@src/firebase';
@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import LoaderSpinner from '@src/components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '@src/components/LoadingSpinner/LoadingSpinner';
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
 
 interface ILoginProps {
@@ -37,7 +37,8 @@ const Login: React.FC<ILoginProps> = () => {
   } = useForm<ILoginInputs>({ resolver: yupResolver(schema), mode: 'onBlur' });
 
   const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     trigger();
@@ -48,6 +49,7 @@ const Login: React.FC<ILoginProps> = () => {
       await logInWithEmailAndPassword(data.email, data.password);
       navigate('/');
     } catch (error) {
+      setErrorMessage('Check your credentials');
       console.error(error);
     }
   };
@@ -61,25 +63,22 @@ const Login: React.FC<ILoginProps> = () => {
   };
 
   if (loading) {
-    return <LoaderSpinner />;
-  }
-
-  if (error) {
-    return <p>Error!</p>;
+    return <LoadingSpinner />;
   }
 
   return (
     <div className="flex bg-green-400 justify-center items-center h-screen mx-auto p-5 rounded">
+      {loading && <LoadingSpinner />}
       {!user ? (
         <div className="max-w-md w-full">
           <h2 className="text-3xl font-semibold text-center mb-4">
             Enter your credentials
           </h2>
-          <form onSubmit={handleSubmit(signIn)} className="space-y-4">
+          <form className="space-y-4">
             <div id="email">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-600"
+                className="block text-sm font-medium text-gray-600 mb-2"
               >
                 Email
               </label>
@@ -97,7 +96,7 @@ const Login: React.FC<ILoginProps> = () => {
             <div id="password">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-600"
+                className="block text-sm font-medium text-gray-600 mb-2"
               >
                 Password
               </label>
@@ -116,11 +115,12 @@ const Login: React.FC<ILoginProps> = () => {
               <CustomButton
                 label="Login"
                 type="submit"
-                onClick={() => signIn}
+                onClick={handleSubmit(signIn)}
                 disabled={!isValid}
               />
             </div>
           </form>
+          {errorMessage && <div className="text-red-800">{errorMessage}</div>}
           <div className="flex flex-col gap-4 text-center mt-4">
             Don&apos;t have an account?
             <CustomButton
