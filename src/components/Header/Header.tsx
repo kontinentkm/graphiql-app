@@ -66,17 +66,14 @@ const Header: FC = (): JSX.Element => {
           </button>
         ) : (
           <div className={styles.buttons}>
-            <button
-              type="button"
-              onClick={(): void => navigate(EPages.SIGN_IN)}
-            >
-              {localizationStrings[lang].signInBtn}
+            <button type="button" onClick={(): void => navigate(EPages.LOGIN)}>
+              {localizationStrings[lang].loginBtn}
             </button>
             <button
               type="button"
-              onClick={(): void => navigate(EPages.SIGN_UP)}
+              onClick={(): void => navigate(EPages.REGISTER)}
             >
-              {localizationStrings[lang].signUpBtn}
+              {localizationStrings[lang].registerBtn}
             </button>
           </div>
         )}
