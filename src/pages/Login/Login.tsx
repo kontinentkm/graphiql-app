@@ -1,14 +1,15 @@
 import { ReactNode, useEffect, useState } from 'react';
 import CustomButton from '@src/components/CustomButton/CustomButton.tsx';
 import { useNavigate } from 'react-router-dom';
-import { auth, logInWithEmailAndPassword } from '@src/firebase';
-import { signOut } from 'firebase/auth';
+import { auth } from '@src/firebase';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import LoadingSpinner from '@src/components/LoadingSpinner/LoadingSpinner';
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
+import { FirebaseError } from 'firebase/app';
 
 interface ILoginProps {
   children?: ReactNode;
@@ -46,11 +47,10 @@ const Login: React.FC<ILoginProps> = () => {
 
   const signIn = async (data: ILoginInputs) => {
     try {
-      await logInWithEmailAndPassword(data.email, data.password);
-      navigate('/');
+      await signInWithEmailAndPassword(auth, data.email, data.password);
     } catch (error) {
       setErrorMessage('Check your credentials');
-      console.error(error);
+      console.error(`error:`, (error as FirebaseError)?.message);
     }
   };
 
@@ -70,15 +70,15 @@ const Login: React.FC<ILoginProps> = () => {
     <div className="flex bg-green-400 justify-center items-center h-screen mx-auto p-5 rounded">
       {loading && <LoadingSpinner />}
       {!user ? (
-        <div className="max-w-md w-full">
+        <div className="w-96">
           <h2 className="text-3xl font-semibold text-center mb-4">
             Enter your credentials
           </h2>
-          <form className="space-y-4">
-            <div id="email">
+          <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
+            <div id="email" className="mb-8">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-600 mb-2"
+                className="block text-sm font-medium text-indigo-600 mb-2"
               >
                 Email
               </label>
@@ -87,16 +87,16 @@ const Login: React.FC<ILoginProps> = () => {
                 placeholder="Enter your email"
                 required
                 {...register('email')}
-                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-gray-600"
+                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
               />
               <p className="text-black font-bold text-sm mt-1">
                 {errors.email?.message}
               </p>
             </div>
-            <div id="password">
+            <div id="password" className="mb-8">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-600 mb-2"
+                className="block text-sm font-medium text-indigo-600 mb-2"
               >
                 Password
               </label>
@@ -105,19 +105,14 @@ const Login: React.FC<ILoginProps> = () => {
                 placeholder="Enter your password"
                 required
                 {...register('password')}
-                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-gray-600"
+                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
               />
               <p className="text-black font-bold text-sm mt-1">
                 {errors.password?.message}
               </p>
             </div>
             <div className="flex justify-center">
-              <CustomButton
-                label="Login"
-                type="submit"
-                onClick={handleSubmit(signIn)}
-                disabled={!isValid}
-              />
+              <CustomButton label="Login" type="submit" disabled={!isValid} />
             </div>
           </form>
           {errorMessage && <div className="text-red-800">{errorMessage}</div>}

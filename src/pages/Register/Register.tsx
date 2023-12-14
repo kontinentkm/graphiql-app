@@ -72,7 +72,7 @@ const Register: React.FC<IRegisterProps> = () => {
         {loading && <LoadingSpinner />}
         {!user ? (
           <>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-96">
               <h2 className="text-3xl font-semibold text-center mb-4">
                 Create your account
               </h2>
@@ -80,7 +80,7 @@ const Register: React.FC<IRegisterProps> = () => {
                 <div id="name">
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-600 mb-2"
+                    className="block text-sm font-medium text-indigo-600 mb-2"
                   >
                     Name
                   </label>
@@ -89,7 +89,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     placeholder="Enter your name"
                     required
                     {...register('name')}
-                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-gray-600"
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
                   <p className="text-black font-bold text-sm mt-1">
                     {errors.name?.message}
@@ -98,7 +98,7 @@ const Register: React.FC<IRegisterProps> = () => {
                 <div id="email">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-600 mb-2"
+                    className="block text-sm font-medium text-indigo-600 mb-2"
                   >
                     Email
                   </label>
@@ -107,7 +107,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     placeholder="Enter your email"
                     required
                     {...register('email')}
-                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-gray-600"
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
                   <p className="text-black font-bold text-sm mt-1">
                     {errors.email?.message}
@@ -116,7 +116,7 @@ const Register: React.FC<IRegisterProps> = () => {
                 <div id="password">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-600 mb-2"
+                    className="block text-sm font-medium text-indigo-600 mb-2"
                   >
                     Password
                   </label>
@@ -125,7 +125,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     placeholder="Enter you password"
                     required
                     {...register('password')}
-                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-gray-600"
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
                   <p className="text-black font-bold text-sm mt-1">
                     {errors.password?.message}

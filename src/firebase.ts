@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
@@ -23,14 +22,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const registerWithEmailAndPassword = async (
   name: string,
@@ -64,11 +55,4 @@ const logout = () => {
   signOut(auth);
 };
 
-export {
-  auth,
-  db,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  sendPasswordReset,
-  logout,
-};
+export { auth, db, registerWithEmailAndPassword, sendPasswordReset, logout };
