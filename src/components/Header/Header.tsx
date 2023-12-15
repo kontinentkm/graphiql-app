@@ -29,7 +29,6 @@ const Header: FC = (): JSX.Element => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const dispatch = useAppDispatch();
-  // const authorized: boolean = useSelector(selectAuthorization);
 
   const [user] = useAuthState(auth);
   const lang: Localization = useSelector(selectLocalization);

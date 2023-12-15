@@ -52,12 +52,7 @@ const Register: React.FC<IRegisterProps> = () => {
   const createAccount = async (data: IRegisterInputs) => {
     try {
       await registerWithEmailAndPassword(data.name, data.email, data.password);
-      const timer = setTimeout(() => {
-        navigate('/');
-      }, 3000);
-      return () => {
-        clearTimeout(timer);
-      };
+      navigate('/');
     } catch (error) {
       setErrorMessage(
         (error as FirebaseError)?.message || 'An unknown error occurred'
