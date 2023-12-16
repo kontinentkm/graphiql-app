@@ -4,10 +4,6 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@src/hooks/reduxHooks';
 
 import {
-  authorize,
-  selectAuthorization,
-} from '@src/store/AuthorizationSlice/AuthorizationSlice';
-import {
   selectLocalization,
   changeLanguage,
 } from '@src/store/LocalizationSlice/LocalizationSlice';
@@ -23,6 +19,9 @@ import { APP_TITLE } from '@src/constants/global';
 import Toggler from '@src/UI/Toggler/Toggler';
 import localizationStrings from '@src/constants/localizationStrings';
 
+import { auth, logout } from '@src/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
 
@@ -30,10 +29,14 @@ const Header: FC = (): JSX.Element => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const dispatch = useAppDispatch();
-  const authorized: boolean = useSelector(selectAuthorization);
+
+  const [user] = useAuthState(auth);
   const lang: Localization = useSelector(selectLocalization);
 
-  const unauthorizeBTNClick = () => dispatch(authorize(false));
+  const unauthorizeBTNClick = () => {
+    logout();
+    navigate('/login');
+  };
 
   // for sticky header
   useEffect((): void => {
@@ -55,28 +58,25 @@ const Header: FC = (): JSX.Element => {
           <NavLink to={EPages.WELCOME}>
             {localizationStrings[lang].welcome}
           </NavLink>
-          {authorized && (
+          {user && (
             <NavLink to={EPages.MAIN}>{localizationStrings[lang].main}</NavLink>
           )}
         </nav>
 
-        {authorized ? (
+        {user ? (
           <button type="button" onClick={unauthorizeBTNClick}>
             {localizationStrings[lang].signOutBtn}
           </button>
         ) : (
           <div className={styles.buttons}>
-            <button
-              type="button"
-              onClick={(): void => navigate(EPages.SIGN_IN)}
-            >
-              {localizationStrings[lang].signInBtn}
+            <button type="button" onClick={(): void => navigate(EPages.LOGIN)}>
+              {localizationStrings[lang].loginBtn}
             </button>
             <button
               type="button"
-              onClick={(): void => navigate(EPages.SIGN_UP)}
+              onClick={(): void => navigate(EPages.REGISTER)}
             >
-              {localizationStrings[lang].signUpBtn}
+              {localizationStrings[lang].registerBtn}
             </button>
           </div>
         )}
