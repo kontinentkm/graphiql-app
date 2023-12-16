@@ -37,7 +37,6 @@ const Header: FC = (): JSX.Element => {
 
   const unauthorizeBTNClick = () => {
     logout();
-    navigate('/login');
   };
 
   // for sticky header

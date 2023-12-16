@@ -2,7 +2,6 @@ import CustomButton from '@src/UI/CustomButton/CustomButton';
 import { ReactNode, useState, useEffect } from 'react';
 import { registerWithEmailAndPassword, auth } from '@src/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -40,7 +39,6 @@ const Register: React.FC<IRegisterProps> = () => {
     mode: 'onBlur',
   });
 
-  const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -52,7 +50,6 @@ const Register: React.FC<IRegisterProps> = () => {
   const createAccount = async (data: IRegisterInputs) => {
     try {
       await registerWithEmailAndPassword(data.name, data.email, data.password);
-      navigate('/');
     } catch (error) {
       setErrorMessage(
         (error as FirebaseError)?.message || 'An unknown error occurred'
