@@ -10,7 +10,6 @@ import * as yup from 'yup';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
 import { FirebaseError } from 'firebase/app';
-import { setStorageItem } from '@src/utils/setStorageItem';
 interface ILoginProps {
   children?: ReactNode;
 }
@@ -48,8 +47,6 @@ const Login: React.FC<ILoginProps> = () => {
   const signIn = async (data: ILoginInputs) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      const userData = data.email;
-      setStorageItem('userData', userData);
     } catch (error) {
       setErrorMessage('Check your credentials');
       console.error(`error:`, (error as FirebaseError)?.message);

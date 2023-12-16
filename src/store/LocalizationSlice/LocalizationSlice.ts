@@ -5,9 +5,10 @@ import { RootState } from '@src/store/store';
 import EReducers from '@src/types/enums/EReducers';
 import ILocalizationState from '@src/types/interfaces/ILocalizationState';
 import { Localization } from '@src/types/types';
+import { storageItems } from '@src/utils/LocalStorageUtil';
 
 const initialState: ILocalizationState = {
-  language: 'en',
+  language: storageItems.lang,
 };
 
 export const LocalizationSlice = createSlice({
