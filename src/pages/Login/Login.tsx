@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import CustomButton from '@src/components/CustomButton/CustomButton.tsx';
+import CustomButton from '@src/UI/CustomButton/CustomButton';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '@src/firebase';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import LoadingSpinner from '@src/components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
 import { FirebaseError } from 'firebase/app';
 import { setStorageItem } from '@src/utils/setStorageItem';

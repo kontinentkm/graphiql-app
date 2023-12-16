@@ -1,4 +1,4 @@
-import CustomButton from '@src/components/CustomButton/CustomButton';
+import CustomButton from '@src/UI/CustomButton/CustomButton';
 import { ReactNode, useState, useEffect } from 'react';
 import { registerWithEmailAndPassword, auth } from '@src/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { FirebaseError } from '@firebase/util';
 import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
-import LoadingSpinner from '@src/components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
 
 interface IRegisterProps {
   children?: ReactNode;
