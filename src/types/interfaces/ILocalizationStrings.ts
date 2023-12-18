@@ -1,7 +1,7 @@
 interface ILocalizationStrings {
   en: {
-    signInBtn: string;
-    signUpBtn: string;
+    loginBtn: string;
+    registerBtn: string;
     signOutBtn: string;
     welcome: string;
     ourTeam: string;
@@ -14,8 +14,8 @@ interface ILocalizationStrings {
     main: string;
   };
   ru: {
-    signInBtn: string;
-    signUpBtn: string;
+    loginBtn: string;
+    registerBtn: string;
     signOutBtn: string;
     welcome: string;
     ourTeam: string;
