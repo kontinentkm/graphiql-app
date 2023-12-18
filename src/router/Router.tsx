@@ -14,9 +14,9 @@ import NotFound from '@src/pages/NotFound/NotFound';
 import Fallback from '@src/components/Fallback/Fallback';
 
 const useCustomRouter = () => {
-  const [user] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
-  return createBrowserRouter(
+  const routes = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<Fallback />}>
         {user ? privateRoutes : publicRoutes}
@@ -25,6 +25,8 @@ const useCustomRouter = () => {
       </Route>
     )
   );
+
+  return { routes, isLoading };
 };
 
 export default useCustomRouter;

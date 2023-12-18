@@ -1,11 +1,16 @@
 import { RouterProvider } from 'react-router-dom';
 
 import useCustomRouter from '@src/router/Router';
+import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
 
 function App() {
-  const router = useCustomRouter();
+  const { routes, isLoading } = useCustomRouter();
 
-  return <RouterProvider router={router} />;
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
