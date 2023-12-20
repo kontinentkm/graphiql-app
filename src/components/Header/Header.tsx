@@ -13,6 +13,7 @@ import layout from '@src/components/Layout/Layout.module.css';
 
 import EPages from '@src/types/enums/EPages';
 import { Localization } from '@src/types/types';
+import EStorageItems from '@src/types/enums/EStorageItems';
 
 import { APP_TITLE } from '@src/constants/global';
 
@@ -21,6 +22,7 @@ import localizationStrings from '@src/constants/localizationStrings';
 
 import { auth, logout } from '@src/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { setRecord } from '@src/utils/LocalStorageUtil';
 
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
@@ -35,7 +37,6 @@ const Header: FC = (): JSX.Element => {
 
   const unauthorizeBTNClick = () => {
     logout();
-    navigate('/login');
   };
 
   // for sticky header
@@ -48,6 +49,11 @@ const Header: FC = (): JSX.Element => {
       }
     });
   }, []);
+
+  const onTogglerClick = (value: string): void => {
+    setRecord(EStorageItems.LANGUAGE, value);
+    dispatch(changeLanguage(value as Localization));
+  };
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scroll : ''}`}>
@@ -86,11 +92,10 @@ const Header: FC = (): JSX.Element => {
         )}
 
         <Toggler
+          initialState={lang}
           on="ru"
           off="en"
-          callback={(value: string): void => {
-            dispatch(changeLanguage(value as Localization));
-          }}
+          callback={onTogglerClick}
         />
       </div>
     </header>

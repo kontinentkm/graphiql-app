@@ -7,6 +7,7 @@ const Toggler: FC<ITogglerProps> = ({
   callback,
   on,
   off,
+  initialState,
 }: ITogglerProps): JSX.Element => {
   const onChange: React.ChangeEventHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -17,7 +18,11 @@ const Toggler: FC<ITogglerProps> = ({
 
   return (
     <label className={styles.switch}>
-      <input type="checkbox" onChange={onChange} />
+      <input
+        checked={initialState === on}
+        type="checkbox"
+        onChange={onChange}
+      />
       <div className={`${styles.slider} ${styles.round}`}>
         <span className={styles.on}>{on.toUpperCase()}</span>
         <span className={styles.off}>{off.toUpperCase()}</span>
