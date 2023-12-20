@@ -38,6 +38,12 @@ const localizationStrings: ILocalizationStrings = {
       'The "RS: React Course" is designed for RS School students and new participants with basic programming experience. The curriculum covers the fundamentals of JavaScript and TypeScript, working with the version control system Git and the GitHub platform, as well as an introduction to modern web development tools such as NPM, Webpack, CSS3, HTML5, Chrome DevTools, and Figma. The course also provides an understanding of REST architecture.',
 
     main: 'Main',
+    prettify_btn: 'Prettify',
+    execute_btn: 'Execute Query',
+    query: 'Query',
+    variables: 'Query Variables',
+    headers: 'HTTP Headers',
+    input: 'Type JSON URL',
   },
   ru: {
     loginBtn: 'Войти',
@@ -75,6 +81,12 @@ const localizationStrings: ILocalizationStrings = {
     course_text:
       'Курс "RS: React Course" предназначен для студентов RS School и новых участников с базовым опытом в программировании. Обучение охватывает основы языков программирования JavaScript и TypeScript, работу с системой контроля версий Git и платформой GitHub, а также знакомство с современными инструментами веб-разработки, такими как NPM, Webpack, CSS3, HTML5, Chrome DevTools и Figma. Курс также предоставляет понимание архитектуры REST.',
     main: 'Главная',
+    prettify_btn: 'Выровнить',
+    execute_btn: 'Извлечь запрос',
+    query: 'Запрос',
+    variables: 'Переменные запроса',
+    headers: 'HTTP-заголовки',
+    input: 'Введите URL-адрес для получения JSON',
   },
 };
 

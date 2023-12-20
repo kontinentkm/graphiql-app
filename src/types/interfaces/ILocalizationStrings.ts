@@ -10,8 +10,13 @@ interface ILocalizationStrings {
     project_text: string;
     course_title: string;
     course_text: string;
-
     main: string;
+    prettify_btn: string;
+    execute_btn: string;
+    query: string;
+    variables: string;
+    headers: string;
+    input: string;
   };
   ru: {
     loginBtn: string;
@@ -24,8 +29,13 @@ interface ILocalizationStrings {
     project_text: string;
     course_title: string;
     course_text: string;
-
     main: string;
+    prettify_btn: string;
+    execute_btn: string;
+    query: string;
+    variables: string;
+    headers: string;
+    input: string;
   };
 }
 
