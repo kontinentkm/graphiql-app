@@ -1,71 +1,57 @@
-// class EditorError extends Error {
-//   public err: Error;
-//   public location: string;
+import { APIError, EditorError } from './errors_classes';
 
-//   constructor(err: Error, location: string, message?: string) {
-//     super(message);
-//     this.err = err;
-//     this.location = location;
-//   }
-// }
+const errorHandler = (err: Error): string => {
+  if (err instanceof EditorError) {
+    return `SyntaxError in ${err.editorName} Editor! \n${err.editorName} must be a valid JSON object!`;
+  } else if (err instanceof APIError) {
+    return `Data Fetching Error!\n${JSON.stringify(err.data, undefined, 2)}`;
+  }
+  return `Unknown error! \n ${err}`;
+};
 
-// class APIError extends Error {
-//   public data: object;
+const getApiResponse = async (
+  source: string,
+  query: string,
+  variables: string,
+  headers: string
+): Promise<string> => {
+  let variablesObj;
+  let headersObj;
 
-//   constructor(data: object, message?: string) {
-//     super(message);
-//     this.data = data;
-//   }
-// }
+  try {
+    try {
+      variablesObj = variables ? JSON.parse(variables) : {};
+    } catch (err) {
+      throw new EditorError('Variables');
+    }
 
-// const errorHandler = (err: Error, callback: (message: string) => void) => {
-//   if (err instanceof EditorError) {
-//     callback(`Error in ${err.location} \n ${err}`);
-//   } else if (err instanceof APIError) {
-//     callback(
-//       `Error on data fetching \n ${JSON.stringify(err.data, undefined, 2)}`
-//     );
-//   } else {
-//     callback(`Unknown error \n ${err}`);
-//   }
-// };
+    try {
+      headersObj = headers ? JSON.parse(headers) : {};
+    } catch (err) {
+      throw new EditorError('Headers');
+    }
 
-// const getData = async () => {
-//   let variables_obj;
-//   let headers_obj;
+    const response = await fetch(source, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headersObj,
+      },
+      body: JSON.stringify({
+        query,
+        variables: variablesObj,
+      }),
+    });
 
-//   try {
-//     try {
-//       const value = variables_element.value;
-//       variables_obj = value ? JSON.parse(value) : {};
-//     } catch (err) {
-//       throw new EditorError(err, 'variables editor');
-//     }
+    const data = await response.json();
 
-//     try {
-//       const value = headers_element.value;
-//       headers_obj = value ? JSON.parse(value) : {};
-//     } catch (err) {
-//       throw new EditorError(err, 'headers editor');
-//     }
+    if (!response.ok) throw new APIError(data);
 
-//     const response = await fetch(source_element.value, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         query: editor_element.value,
-//         variables: variables_obj,
-//       }),
-//     });
+    return JSON.stringify(data, undefined, 2);
+  } catch (err) {
+    if (err instanceof Error) return errorHandler(err);
+    return `${err}`;
+  }
+};
 
-//     const data = await response.json();
-
-//     if (!response.ok) throw new APIError(data);
-
-//     response_element.value = JSON.stringify(data, undefined, 2);
-//   } catch (err) {
-//     errorHandler(err);
-//   }
-// };
+export { getApiResponse };

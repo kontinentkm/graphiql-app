@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 
 import styles from './styles.module.css';
+import { getApiResponse } from '@src/services/api_request';
 
 const Main: FC = (): JSX.Element => {
   const [source, setSource] = useState('https://graphql-pokeapi.graphcdn.app/');
@@ -9,16 +10,26 @@ const Main: FC = (): JSX.Element => {
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
 
-  const onSourceChange = (event: ChangeEvent<HTMLInputElement>) =>
+  const onSourceChange = (event: ChangeEvent<HTMLInputElement>): void =>
     setSource(event.target.value);
-  const onQueryChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
+  const onQueryChange = (event: ChangeEvent<HTMLTextAreaElement>): void =>
     setQuery(event.target.value);
-  const onResponseChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
+  const onResponseChange = (event: ChangeEvent<HTMLTextAreaElement>): void =>
     setResponse(event.target.value);
-  const onVariablesChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
+  const onVariablesChange = (event: ChangeEvent<HTMLTextAreaElement>): void =>
     setVariables(event.target.value);
-  const onHeadersChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
+  const onHeadersChange = (event: ChangeEvent<HTMLTextAreaElement>): void =>
     setHeaders(event.target.value);
+
+  const onDoRequestClick = async (): Promise<void> => {
+    const response: string = await getApiResponse(
+      source,
+      query,
+      variables,
+      headers
+    );
+    setResponse(response);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +49,7 @@ const Main: FC = (): JSX.Element => {
           <option value="https://swapi-graphql.netlify.app/.netlify/functions/index"></option>
           <option value="https://countries.trevorblades.com/graphql"></option>
         </datalist>
-        <button type="button" id="button">
+        <button type="button" id="button" onClick={onDoRequestClick}>
           Do request
         </button>
       </form>
