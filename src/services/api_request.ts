@@ -6,7 +6,7 @@ const errorHandler = (err: Error): string => {
   } else if (err instanceof APIError) {
     return `Data Fetching Error!\n${JSON.stringify(err.data, undefined, 2)}`;
   }
-  return `Unknown error! \n ${err}`;
+  return `Data Fetching Error!\n${err}`;
 };
 
 const getApiResponse = async (
