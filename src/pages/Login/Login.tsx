@@ -10,12 +10,25 @@ import * as yup from 'yup';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
 import { FirebaseError } from 'firebase/app';
+import localizationStrings from '@src/constants/localizationStrings';
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import { Localization } from '@src/types/types';
+import { useSelector } from 'react-redux';
+
 interface ILoginProps {
   children?: ReactNode;
 }
 
 const schema = yup.object({
-  email: yup.string().required('Your email is required'),
+  email: yup
+    .string()
+    .required(
+      `${
+        localStorage.getItem('lang') === 'en'
+          ? 'Your email is required'
+          : 'Введите email'
+      }`
+    ),
   password: yup
     .string()
     .min(8)
@@ -39,10 +52,11 @@ const Login: React.FC<ILoginProps> = () => {
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const lang: Localization = useSelector(selectLocalization);
 
   useEffect(() => {
     trigger();
-  }, [setValue, trigger]);
+  }, [setValue, trigger, register]);
 
   const signIn = async (data: ILoginInputs) => {
     try {
@@ -71,7 +85,7 @@ const Login: React.FC<ILoginProps> = () => {
       {!user ? (
         <div className="w-96">
           <h2 className="text-3xl font-semibold text-center mb-4">
-            Enter your credentials
+            {localizationStrings[lang].login[0]}
           </h2>
           <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
             <div id="email" className="mb-8">
@@ -79,7 +93,7 @@ const Login: React.FC<ILoginProps> = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-indigo-600 mb-2"
               >
-                Email
+                {localizationStrings[lang].login[1]}
               </label>
               <input
                 type="email"
@@ -97,7 +111,7 @@ const Login: React.FC<ILoginProps> = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-indigo-600 mb-2"
               >
-                Password
+                {localizationStrings[lang].login[2]}
               </label>
               <input
                 type="password"
@@ -111,14 +125,18 @@ const Login: React.FC<ILoginProps> = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <CustomButton label="Login" type="submit" disabled={!isValid} />
+              <CustomButton
+                label={localizationStrings[lang].login[3]}
+                type="submit"
+                disabled={!isValid}
+              />
             </div>
           </form>
           {errorMessage && <div className="text-red-800">{errorMessage}</div>}
           <div className="flex flex-col gap-4 text-center mt-4">
-            Don&apos;t have an account?
+            {localizationStrings[lang].login[4]}
             <CustomButton
-              label="Create account"
+              label={localizationStrings[lang].login[5]}
               onClick={() => {
                 navigate('/register');
               }}

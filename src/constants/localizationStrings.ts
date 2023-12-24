@@ -50,6 +50,21 @@ const localizationStrings: ILocalizationStrings = {
     variables: 'Query Variables',
     headers: 'HTTP Headers',
     input: 'Type JSON URL',
+    login: [
+      'Enter your credentials',
+      'Email',
+      'Password',
+      'Login',
+      'Dont have an account?',
+      'Create account',
+    ],
+    register: [
+      'Create your account',
+      'Name',
+      'Email',
+      'Password',
+      'Create account',
+    ],
   },
   ru: {
     loginBtn: 'Войти',
@@ -99,6 +114,21 @@ const localizationStrings: ILocalizationStrings = {
     variables: 'Переменные запроса',
     headers: 'HTTP-заголовки',
     input: 'Введите URL-адрес для получения JSON',
+    login: [
+      'Войдите в свой аккаунт',
+      'Эл. почта',
+      'Пароль',
+      'Войти',
+      'Нет аккаунта?',
+      'Создать аккаунт',
+    ],
+    register: [
+      'Создайте свой аккаунт',
+      'Имя',
+      'Эл. почта',
+      'Пароль',
+      'Создать аккаунт',
+    ],
   },
 };
 

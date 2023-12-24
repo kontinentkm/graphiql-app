@@ -8,6 +8,10 @@ import * as yup from 'yup';
 import { FirebaseError } from '@firebase/util';
 import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import { Localization } from '@src/types/types';
+import { useSelector } from 'react-redux';
+import localizationStrings from '@src/constants/localizationStrings';
 
 interface IRegisterProps {
   children?: ReactNode;
@@ -41,6 +45,7 @@ const Register: React.FC<IRegisterProps> = () => {
 
   const [user, loading] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const lang: Localization = useSelector(selectLocalization);
 
   useEffect(() => {
     trigger();
@@ -66,7 +71,7 @@ const Register: React.FC<IRegisterProps> = () => {
           <>
             <div className="flex flex-col w-96">
               <h2 className="text-3xl font-semibold text-center mb-4">
-                Create your account
+                {localizationStrings[lang].register[0]}
               </h2>
               <form className="space-y-4">
                 <div id="name">
@@ -74,7 +79,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="name"
                     className="block text-sm font-medium text-indigo-600 mb-2"
                   >
-                    Name
+                    {localizationStrings[lang].register[1]}
                   </label>
                   <input
                     type="name"
@@ -92,7 +97,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="email"
                     className="block text-sm font-medium text-indigo-600 mb-2"
                   >
-                    Email
+                    {localizationStrings[lang].register[2]}
                   </label>
                   <input
                     type="email"
@@ -110,7 +115,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="password"
                     className="block text-sm font-medium text-indigo-600 mb-2"
                   >
-                    Password
+                    {localizationStrings[lang].register[3]}
                   </label>
                   <input
                     type="password"
@@ -125,7 +130,7 @@ const Register: React.FC<IRegisterProps> = () => {
                 </div>
                 <div className="flex justify-center">
                   <CustomButton
-                    label="Create account"
+                    label={localizationStrings[lang].register[4]}
                     onClick={handleSubmit(createAccount)}
                     type="submit"
                     disabled={!isValid}

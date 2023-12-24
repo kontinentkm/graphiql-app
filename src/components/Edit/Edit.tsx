@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FunctionComponent as FC } from 'react';
-import IEdit from './IEdit';
+import { IEdit } from '@src/types/interfaces/IEdit';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/xml/xml';
@@ -13,10 +13,9 @@ import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSli
 import { Localization } from '@src/types/types';
 import { useSelector } from 'react-redux';
 
-const Edit: FC<IEdit> = ({}) => {
+const Edit: FC<IEdit> = ({ onQueryChange, code }) => {
   const lang: Localization = useSelector(selectLocalization);
 
-  const [queryValue, setQueryValue] = useState('');
   const [showQuery, setshowQuery] = useState(true);
   const [showResults, setShowResults] = useState(false);
   const [activeButton, setActiveButton] = useState('query');
@@ -56,8 +55,10 @@ const Edit: FC<IEdit> = ({}) => {
 
       {showQuery && (
         <CodeMirror
-          onChange={(editor, data, value) => setQueryValue(value)}
-          value={queryValue}
+          onChange={(editor, data, value) => {
+            onQueryChange(value);
+          }}
+          value={code}
           options={{
             mode: 'xml',
             theme: 'material',

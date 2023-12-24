@@ -6,6 +6,7 @@ import Main from '@src/pages/Main/Main';
 import Welcome from '@src/pages/Welcome/Welcome';
 import Login from '@src/pages/Login/Login';
 import Register from '@src/pages/Register/Register';
+import QueryEditor from '@src/pages/QueryEditor/QueryEditor';
 
 export const privateRoutes: JSX.Element[] = [
   <Route key={'0'} path="/" element={<Navigate to={EPages.WELCOME} />} />,
@@ -21,6 +22,7 @@ export const privateRoutes: JSX.Element[] = [
     path={EPages.REGISTER}
     element={<Navigate to={`/${EPages.MAIN}`} />}
   />,
+  <Route key={'5'} path={'/query'} element={<QueryEditor />} />,
 ];
 
 export const publicRoutes: JSX.Element[] = [

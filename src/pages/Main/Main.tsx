@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from '@src/pages/Main/Main.module.css';
 import localizationStrings from '@src/constants/localizationStrings';
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
@@ -7,18 +7,28 @@ import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
+import CustomButton from '@src/UI/CustomButton/CustomButton';
+import { prettifyCode } from '@src/utils/prettifyCode';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
+  const [queryValue, setQueryValue] = useState<string>('');
+
+  const handlePrettify = () => {
+    const prettifiedQuery = prettifyCode(queryValue);
+    setQueryValue(prettifiedQuery);
+  };
 
   return (
     <div>
       <div className={styles.main_container}>
         <p>{localizationStrings[lang].main}</p>
         <div className={styles.top_block}>
-          <button className={styles.prettify_btn}>
-            {localizationStrings[lang].prettify_btn}
-          </button>
+          <CustomButton
+            onClick={handlePrettify}
+            type="button"
+            label={localizationStrings[lang].prettify_btn}
+          />
           <button className={styles.results_btn}>
             {localizationStrings[lang].results_btn}
           </button>
@@ -42,7 +52,10 @@ const Main: FC = (): JSX.Element => {
           </div>
         </div>
 
-        <Edit />
+        <Edit
+          onQueryChange={(newQuery: string) => setQueryValue(newQuery)}
+          code={queryValue}
+        />
         <Variables />
       </div>
     </div>
