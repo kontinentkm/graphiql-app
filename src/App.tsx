@@ -1,4 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import useCustomRouter from '@src/router/Router';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
@@ -10,7 +13,12 @@ function App() {
     return <LoadingSpinner />;
   }
 
-  return <RouterProvider router={routes} />;
+  return (
+    <>
+      <RouterProvider router={routes} />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;

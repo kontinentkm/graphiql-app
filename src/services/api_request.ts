@@ -1,4 +1,5 @@
 import { APIError, EditorError } from './errors_classes';
+import { toast } from 'react-toastify';
 
 const errorHandler = (err: Error): string => {
   if (err instanceof EditorError) {
@@ -46,11 +47,17 @@ const getApiResponse = async (
     const data = await response.json();
 
     if (!response.ok) throw new APIError(data);
-
+    toast.success('All right');
     return JSON.stringify(data, undefined, 2);
   } catch (err) {
-    if (err instanceof Error) return errorHandler(err);
-    return `${err}`;
+    let errString;
+    if (err instanceof Error) {
+      errString = errorHandler(err);
+    } else {
+      errString = `${err}`;
+    }
+    toast.error(errString);
+    return errString;
   }
 };
 
