@@ -1,0 +1,14 @@
+.variables_btns {
+  display: flex;
+  background-color: #1b2328;
+}
+
+.variables_btn {
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.active_btn {
+  background-color: #263238;
+  transition: 0.2s;
+}

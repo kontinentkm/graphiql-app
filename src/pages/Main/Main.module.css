@@ -1,0 +1,89 @@
+.main_container {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  max-width: 1240px;
+}
+
+.top_block {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.input_block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  padding-right: 2.2rem;
+  padding-left: 0.5rem;
+  margin-left: 1rem;
+  background-color: #263238;
+  height: 2rem;
+  width: 100%;
+}
+
+.search_btn {
+  position: absolute;
+  right: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.search_btn svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: #555;
+}
+
+.search_btn svg:hover {
+  fill: #989898;
+  transition: 0.2s;
+}
+
+.search_btn svg:active {
+  fill: #ddd;
+  transition: 0.2s;
+}
+
+.results_btn {
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+/* .execute_btn_container {
+  display: flex;
+  justify-content: center;
+}
+
+.execute_btn {
+  cursor: pointer;
+}
+
+.execute_btn svg {
+  width: 3rem;
+  height: 3rem;
+  fill: #555;
+}
+
+.execute_btn svg:hover {
+  fill: #989898;
+  transition: 0.2s;
+}
+
+.execute_btn svg:active {
+  fill: #ddd;
+  transition: 0.2s;
+}
+
+.editor_container {
+  margin-top: 0.3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  height: 100%;
+} */
