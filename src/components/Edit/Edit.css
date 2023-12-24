@@ -1,0 +1,33 @@
+.react-codemirror2 {
+  /* position: relative; */
+  /* height: 100px; */
+  /* display: flex; */
+}
+
+.react-codemirror2 .CodeMirror-wrap {
+  /* position: absolute; */
+  /* width: 100%; */
+}
+
+.edit_blocks {
+  margin-top: 1rem;
+}
+
+.edit_btns {
+  display: flex;
+  background-color: #1b2328;
+}
+
+.edit_btn {
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.active_btn {
+  background-color: #263238;
+  transition: 0.2s;
+}
+
+.edit_block_results {
+  background-color: #263238;
+}

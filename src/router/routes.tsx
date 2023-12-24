@@ -25,12 +25,11 @@ export const privateRoutes: JSX.Element[] = [
 
 export const publicRoutes: JSX.Element[] = [
   <Route key={'0'} path="/" element={<Navigate to={EPages.WELCOME} />} />,
-  // <Route
-  //   key={'1'}
-  //   path={EPages.MAIN}
-  //   element={<Navigate to={`/${EPages.WELCOME}`} />}
-  // />,
-  <Route key={'1'} path={EPages.MAIN} element={<Main />} />,
+  <Route
+    key={'1'}
+    path={EPages.MAIN}
+    element={<Navigate to={`/${EPages.WELCOME}`} />}
+  />,
   <Route key={'2'} path={EPages.WELCOME} element={<Welcome />} />,
   <Route key={'3'} path={EPages.LOGIN} element={<Login />} />,
   <Route key={'4'} path={EPages.REGISTER} element={<Register />} />,

@@ -50,7 +50,12 @@
   transition: 0.2s;
 }
 
-.execute_btn_container {
+.results_btn {
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+/* .execute_btn_container {
   display: flex;
   justify-content: center;
 }
@@ -81,4 +86,4 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   height: 100%;
-}
+} */

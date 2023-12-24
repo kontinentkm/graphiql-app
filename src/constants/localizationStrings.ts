@@ -39,6 +39,12 @@ const localizationStrings: ILocalizationStrings = {
 
     main: 'Main',
     prettify_btn: 'Prettify',
+    results_btn: 'Get results',
+    edit_btn: 'Query',
+    edit_btn_results: 'Show results',
+    variables_btn: 'Variables',
+    headers_btn: 'Headers',
+
     execute_btn: 'Execute Query',
     query: 'Query',
     variables: 'Query Variables',
@@ -82,8 +88,14 @@ const localizationStrings: ILocalizationStrings = {
       'Курс "RS: React Course" предназначен для студентов RS School и новых участников с базовым опытом в программировании. Обучение охватывает основы языков программирования JavaScript и TypeScript, работу с системой контроля версий Git и платформой GitHub, а также знакомство с современными инструментами веб-разработки, такими как NPM, Webpack, CSS3, HTML5, Chrome DevTools и Figma. Курс также предоставляет понимание архитектуры REST.',
     main: 'Главная',
     prettify_btn: 'Выровнить',
+    results_btn: 'Получить результаты',
+    edit_btn: 'Запрос',
+    variables_btn: 'Переменные',
+    headers_btn: 'Заголовки',
+
     execute_btn: 'Извлечь запрос',
     query: 'Запрос',
+    edit_btn_results: 'Показать результаты',
     variables: 'Переменные запроса',
     headers: 'HTTP-заголовки',
     input: 'Введите URL-адрес для получения JSON',

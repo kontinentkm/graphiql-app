@@ -65,9 +65,6 @@ const Header: FC = (): JSX.Element => {
             {localizationStrings[lang].welcome}
           </NavLink>
 
-          {/* For development */}
-          <NavLink to={EPages.MAIN}>{localizationStrings[lang].main}</NavLink>
-
           {user && (
             <NavLink to={EPages.MAIN}>{localizationStrings[lang].main}</NavLink>
           )}
