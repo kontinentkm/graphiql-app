@@ -26,4 +26,7 @@
   height: 300px;
   padding-top: 0.5rem;
   padding-left: 1rem;
+  width: 100%;
+  display: block;
+  resize: none;
 }

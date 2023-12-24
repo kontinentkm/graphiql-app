@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FunctionComponent as FC } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -22,6 +22,7 @@ const Edit: FC<IEditProps> = ({
   queryValue,
   resultsValue,
   onQueryChange,
+  onResultChange,
 }): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
@@ -46,6 +47,9 @@ const Edit: FC<IEditProps> = ({
     data: CodeMirror.EditorChange,
     value: string
   ): void => onQueryChange(value);
+
+  const handleResultChange = (e: ChangeEvent<HTMLTextAreaElement>): void =>
+    onResultChange(e.target.value);
 
   return (
     <div className="edit_blocks">
@@ -79,7 +83,13 @@ const Edit: FC<IEditProps> = ({
           }}
         />
       )}
-      {showResults && <div className="edit_block_results">{resultsValue}</div>}
+      {showResults && (
+        <textarea
+          value={resultsValue}
+          onChange={handleResultChange}
+          className="edit_block_results"
+        ></textarea>
+      )}
     </div>
   );
 };

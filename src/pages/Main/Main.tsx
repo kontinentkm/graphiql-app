@@ -1,12 +1,18 @@
 import { FC, useRef, useState } from 'react';
-import styles from '@src/pages/Main/Main.module.css';
-import localizationStrings from '@src/constants/localizationStrings';
-import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
-import { Localization } from '@src/types/types';
 import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
+
+import styles from '@src/pages/Main/Main.module.css';
+
+import localizationStrings from '@src/constants/localizationStrings';
+
+import { Localization } from '@src/types/types';
+
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
+
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import getData from '@src/services/ApiDataService';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -18,8 +24,11 @@ const Main: FC = (): JSX.Element => {
   const sourceRef = useRef<HTMLInputElement | null>(null);
 
   const onPrettifyClick = (): void => console.log('prettify');
-  const onGetResultsClick = (): void => {
-    setResults(query);
+  const onGetResultsClick = async (): Promise<void> => {
+    const source: string = sourceRef.current?.value || '';
+    const data = await getData(source, query, variables, headers);
+    const result = JSON.stringify(data).slice(1, -1);
+    setResults(result);
   };
 
   return (
@@ -56,8 +65,9 @@ const Main: FC = (): JSX.Element => {
 
         <Edit
           queryValue={query}
-          onQueryChange={setQuery}
           resultsValue={results}
+          onQueryChange={setQuery}
+          onResultChange={setResults}
         />
         <Variables
           variablesValue={variables}
