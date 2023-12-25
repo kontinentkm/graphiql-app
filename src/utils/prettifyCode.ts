@@ -1,42 +1,60 @@
-export const prettifyCode = (code: string) => {
-  const lines = code.split('\n');
+export const prettifyCode = (query: string, indentation = 2) => {
+  const lines = query.split('\n');
 
-  let indentation = 0;
+  let currentIndentation = 0;
   const braceRegex = /\{|\}/;
 
-  const formattedLines = lines.map((line) => {
+  const formattedLines = lines.map((line, index) => {
     const trimmedLine = line.trim();
     const hasBrace = braceRegex.test(trimmedLine);
 
     if (hasBrace) {
       if (trimmedLine.endsWith('{')) {
-        const indentedLine = ' '.repeat(indentation) + trimmedLine;
+        const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
 
         return indentedLine.replace(/\{\s*$/, ' {');
       }
 
       if (trimmedLine.endsWith('}')) {
-        indentation = Math.max(0, indentation - 2);
+        currentIndentation = Math.max(0, currentIndentation - indentation);
         const trimmedWithoutLastChar = trimmedLine.slice(0, -1);
-        return ' '.repeat(indentation) + trimmedWithoutLastChar + '\n}';
+        const lastLine = index === lines.length - 1;
+        const newLine = lastLine ? '\n' : '';
+        return (
+          ' '.repeat(currentIndentation) +
+          trimmedWithoutLastChar +
+          newLine +
+          '}'
+        );
       }
     }
 
     const indentedLine =
-      ' '.repeat(indentation) + trimmedLine.replace(/:\s*([^}])/g, ': $1');
+      ' '.repeat(currentIndentation) +
+      trimmedLine.replace(/:\s*([^}])/g, ': $1');
 
     if (trimmedLine.includes('{')) {
-      indentation += 2;
+      currentIndentation += indentation;
     }
 
     if (trimmedLine.includes('}')) {
-      indentation = Math.max(0, indentation - 2);
+      currentIndentation = Math.max(0, currentIndentation - indentation);
     }
 
     return indentedLine;
   });
 
-  const formattedQuery = formattedLines.join('\n');
-
-  return formattedQuery;
+  return formattedLines.join('\n');
 };
+
+// export function prettifyCode(input: string) {
+//   const formattedInput = input
+//     .replace(/([a-z])([A-Z])/g, '$1 $2')
+//     .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+//     .replace(/(\w+):/g, '$1: ')
+//     .replace(/(\w+)\!/g, '$1!')
+//     .replace(/(\w+)\n/g, '$1\n  ')
+//     .replace(/(\w+)\{/, '$1 {\n  ')
+//     .replace(/\}/g, '\n}');
+//   return formattedInput;
+// }
