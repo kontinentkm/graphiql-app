@@ -27,7 +27,7 @@ const Main: FC = (): JSX.Element => {
   const onGetResultsClick = async (): Promise<void> => {
     const source: string = sourceRef.current?.value || '';
     const data = await getData(source, query, variables, headers);
-    const result = JSON.stringify(data).slice(1, -1);
+    const result = data.toString();
     setResults(result);
   };
 

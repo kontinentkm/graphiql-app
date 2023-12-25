@@ -1,4 +1,4 @@
-import toastSettings from '@src/constants/toastSettings';
+import { toastSettings } from '@src/constants/toastSettings';
 import axios from 'axios';
 
 import { Id, toast } from 'react-toastify';

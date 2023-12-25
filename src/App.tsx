@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import useCustomRouter from '@src/router/Router';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+import { toastContainerSettings } from '@src/constants/toastSettings';
 
 function App() {
   const { routes, isLoading } = useCustomRouter();
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <RouterProvider router={routes} />
-      <ToastContainer />
+      <ToastContainer {...toastContainerSettings} />
     </>
   );
 }
