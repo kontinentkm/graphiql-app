@@ -18,6 +18,7 @@ import getData from '@src/services/ApiDataService';
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
 
 import defaultAPIsUrl from '@src/constants/defaultAPIsURL';
+import getSchema from '@src/services/ApiSchemaService';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -28,10 +29,10 @@ const Main: FC = (): JSX.Element => {
   const [results, setResults] = useState('');
   const sourceRef = useRef<HTMLInputElement | null>(null);
 
+  let source = '';
+
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
-    const source: string = sourceRef.current?.value || '';
-
     const data: string | null = await toastFuncWrapper(
       getData,
       toastMessages[lang].loading_msg,
@@ -48,6 +49,30 @@ const Main: FC = (): JSX.Element => {
       return;
     }
     setResults(data);
+  };
+
+  const onSourceChanging = async (): Promise<void> => {
+    const newSource = sourceRef.current?.value || '';
+    if (newSource === source) return;
+
+    source = newSource;
+    const data = await toastFuncWrapper(
+      getSchema,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].schema_load_success_msg,
+      lang,
+      source
+    );
+    console.log(data);
+  };
+
+  const onSourceBlur = (): void => {
+    onSourceChanging();
+  };
+
+  const onSourceKeyUp = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key !== 'Enter') return;
+    onSourceChanging();
   };
 
   return (
@@ -67,6 +92,8 @@ const Main: FC = (): JSX.Element => {
               type="text"
               placeholder={localizationStrings[lang].input}
               list="suggestions"
+              onBlur={onSourceBlur}
+              onKeyUp={onSourceKeyUp}
               ref={sourceRef}
             />
             <datalist id="suggestions">
