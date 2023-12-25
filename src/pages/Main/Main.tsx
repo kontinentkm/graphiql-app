@@ -28,8 +28,7 @@ const Main: FC = (): JSX.Element => {
   const [headers, setHeaders] = useState('');
   const [results, setResults] = useState('');
   const sourceRef = useRef<HTMLInputElement | null>(null);
-
-  let source = '';
+  const source = useRef('');
 
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
@@ -38,7 +37,7 @@ const Main: FC = (): JSX.Element => {
       toastMessages[lang].loading_msg,
       toastMessages[lang].get_data_success,
       lang,
-      source,
+      source.current,
       query,
       variables,
       headers
@@ -53,15 +52,15 @@ const Main: FC = (): JSX.Element => {
 
   const onSourceChanging = async (): Promise<void> => {
     const newSource = sourceRef.current?.value || '';
-    if (newSource === source) return;
+    if (newSource === source.current) return;
 
-    source = newSource;
+    source.current = newSource;
     const data = await toastFuncWrapper(
       getSchema,
       toastMessages[lang].loading_msg,
       toastMessages[lang].schema_load_success_msg,
       lang,
-      source
+      source.current
     );
     console.log(data);
   };
