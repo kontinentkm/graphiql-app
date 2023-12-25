@@ -16,6 +16,8 @@ export const toastMessages: IToastMessages = {
     get_data_success: 'Successfull data fetching from API',
     logout_error_msg: 'Error on log out',
     logout_success_msg: 'Successfull log out',
+    schema_load_err_msg: 'Error on schema loading',
+    schema_load_success_msg: 'Successfull schema loading',
   },
   ru: {
     loading_msg: 'Обработка запроса...',
@@ -31,6 +33,8 @@ export const toastMessages: IToastMessages = {
     get_data_error: 'Ошибка при получении данных от API',
     logout_error_msg: 'Ошибка при выходе',
     logout_success_msg: 'Успешный выход',
+    schema_load_err_msg: 'Ошибка при загрузке схемы',
+    schema_load_success_msg: 'Успешная загрузка схемы',
   },
 };
 

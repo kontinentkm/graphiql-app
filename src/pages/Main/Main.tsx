@@ -17,6 +17,8 @@ import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSli
 import getData from '@src/services/ApiDataService';
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
 
+import defaultAPIsUrl from '@src/constants/defaultAPIsURL';
+
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
@@ -45,8 +47,7 @@ const Main: FC = (): JSX.Element => {
       setResults('');
       return;
     }
-    const result = data.toString();
-    setResults(result);
+    setResults(data);
   };
 
   return (
@@ -69,11 +70,11 @@ const Main: FC = (): JSX.Element => {
               ref={sourceRef}
             />
             <datalist id="suggestions">
-              <option value="https://graphql-pokeapi.graphcdn.app/" />
-              <option value="https://rickandmortyapi.com/graphql" />
-              <option value="https://spacex-production.up.railway.app/" />
-              <option value="https://swapi-graphql.netlify.app/.netlify/functions/index" />
-              <option value="https://countries.trevorblades.com/graphql" />
+              {defaultAPIsUrl.map(
+                (value: string, index: number): JSX.Element => (
+                  <option value={value} key={index} />
+                )
+              )}
             </datalist>
             <div className={styles.search_btn}>
               <FaSearch />

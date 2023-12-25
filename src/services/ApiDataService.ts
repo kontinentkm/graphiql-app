@@ -39,7 +39,7 @@ const getData = async (
     const response = await axios.post(source, body, config);
     const data = await response.data;
 
-    return JSON.stringify(data, undefined, 2);
+    return JSON.stringify(data, undefined, 4);
   } catch (err) {
     throw new LocalizedError({
       en: toastMessages.en.get_data_error,
