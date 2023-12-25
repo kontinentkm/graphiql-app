@@ -4,7 +4,9 @@ import { FaSearch } from 'react-icons/fa';
 
 import styles from '@src/pages/Main/Main.module.css';
 
-import localizationStrings from '@src/constants/localizationStrings';
+import localizationStrings, {
+  toastMessages,
+} from '@src/constants/localizationStrings';
 
 import { Localization } from '@src/types/types';
 
@@ -13,6 +15,7 @@ import Variables from '@src/components/Variables/Variables';
 
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import getData from '@src/services/ApiDataService';
+import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -26,7 +29,22 @@ const Main: FC = (): JSX.Element => {
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
     const source: string = sourceRef.current?.value || '';
-    const data = await getData(source, query, variables, headers);
+
+    const data: string | null = await toastFuncWrapper(
+      getData,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].get_data_success,
+      lang,
+      source,
+      query,
+      variables,
+      headers
+    );
+
+    if (!data) {
+      setResults('');
+      return;
+    }
     const result = data.toString();
     setResults(result);
   };

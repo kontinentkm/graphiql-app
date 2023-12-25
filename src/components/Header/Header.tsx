@@ -18,16 +18,18 @@ import EStorageItems from '@src/types/enums/EStorageItems';
 import { APP_TITLE } from '@src/constants/global';
 
 import Toggler from '@src/UI/Toggler/Toggler';
-import localizationStrings from '@src/constants/localizationStrings';
+import localizationStrings, {
+  toastMessages,
+} from '@src/constants/localizationStrings';
 
 import { auth, logout } from '@src/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { setRecord } from '@src/utils/LocalStorageUtil';
+import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
 
 const Header: FC = (): JSX.Element => {
   const navigate = useNavigate();
 
-  // for sticky header
   const [isScrolled, setIsScrolled] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -36,10 +38,14 @@ const Header: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
   const unauthorizeBTNClick = () => {
-    logout();
+    toastFuncWrapper(
+      logout,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].logout_success_msg,
+      lang
+    );
   };
 
-  // for sticky header
   useEffect((): void => {
     window.addEventListener('scroll', (): void => {
       if (window.scrollY > 0) {
