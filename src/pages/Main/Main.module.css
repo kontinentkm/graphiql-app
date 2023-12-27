@@ -1,4 +1,8 @@
 .main_container {
+  /*needed for schema hide-show effect*/
+  position: relative;
+  overflow: hidden;
+  /*__________________________________*/
   margin-top: 2rem;
   padding: 0 1rem;
   max-width: 1240px;

@@ -13,6 +13,7 @@ import { Localization } from '@src/types/types';
 
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
+import SchemaWindow from '@src/components/SchemaWindow/SchemaWindow';
 
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import getData from '@src/services/ApiDataService';
@@ -28,6 +29,8 @@ const Main: FC = (): JSX.Element => {
   const [variables, setVariables] = useState<string>('');
   const [headers, setHeaders] = useState<string>('');
   const [results, setResults] = useState<string>('');
+  const [schemaVisibility, setSchemaVisibility] = useState<boolean>(false);
+
   const sourceRef = useRef<HTMLInputElement | null>(null);
   const source = useRef<string>('');
   const schema = useRef<GraphQLSchema | null>(null);
@@ -77,59 +80,61 @@ const Main: FC = (): JSX.Element => {
   };
 
   const onSchemaBtnClick = (): void => {
-    console.log(schema);
+    setSchemaVisibility(!schemaVisibility);
   };
 
   return (
-    <div>
-      <div className={styles.main_container}>
-        <p>{localizationStrings[lang].main}</p>
-        <div className={styles.top_block}>
-          <button className={styles.prettify_btn} onClick={onPrettifyClick}>
-            {localizationStrings[lang].prettify_btn}
-          </button>
-          <button className={styles.results_btn} onClick={onGetResultsClick}>
-            {localizationStrings[lang].results_btn}
-          </button>
-          <button className={styles.results_btn} onClick={onSchemaBtnClick}>
-            {localizationStrings[lang].schema_btn}
-          </button>
-          <div className={styles.input_block}>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder={localizationStrings[lang].input}
-              list="suggestions"
-              onBlur={onSourceBlur}
-              onKeyUp={onSourceKeyUp}
-              ref={sourceRef}
-            />
-            <datalist id="suggestions">
-              {defaultAPIsUrl.map(
-                (value: string, index: number): JSX.Element => (
-                  <option value={value} key={index} />
-                )
-              )}
-            </datalist>
-            <div className={styles.search_btn}>
-              <FaSearch onClick={onSourceBlur} />
-            </div>
+    <div className={styles.main_container}>
+      <div className={styles.top_block}>
+        <button className={styles.prettify_btn} onClick={onPrettifyClick}>
+          {localizationStrings[lang].prettify_btn}
+        </button>
+        <button className={styles.results_btn} onClick={onGetResultsClick}>
+          {localizationStrings[lang].results_btn}
+        </button>
+        <button className={styles.results_btn} onClick={onSchemaBtnClick}>
+          {localizationStrings[lang].schema_btn}
+        </button>
+        <div className={styles.input_block}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder={localizationStrings[lang].input}
+            list="suggestions"
+            onBlur={onSourceBlur}
+            onKeyUp={onSourceKeyUp}
+            ref={sourceRef}
+          />
+          <datalist id="suggestions">
+            {defaultAPIsUrl.map(
+              (value: string, index: number): JSX.Element => (
+                <option value={value} key={index} />
+              )
+            )}
+          </datalist>
+          <div className={styles.search_btn}>
+            <FaSearch onClick={onSourceBlur} />
           </div>
         </div>
-
-        <Edit
-          queryValue={query}
-          resultsValue={results}
-          onQueryChange={setQuery}
-          onResultChange={setResults}
-        />
-        <Variables
-          variablesValue={variables}
-          headersValue={headers}
-          onVariablesChange={setVariables}
-          onHeadersChange={setHeaders}
-        />
       </div>
+
+      <Edit
+        queryValue={query}
+        resultsValue={results}
+        onQueryChange={setQuery}
+        onResultChange={setResults}
+      />
+      <Variables
+        variablesValue={variables}
+        headersValue={headers}
+        onVariablesChange={setVariables}
+        onHeadersChange={setHeaders}
+      />
+      <SchemaWindow
+        schema={schema.current}
+        visible={schemaVisibility}
+        onCloseClick={onSchemaBtnClick}
+      />
     </div>
   );
 };
