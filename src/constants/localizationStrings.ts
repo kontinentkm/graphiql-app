@@ -88,6 +88,8 @@ const localizationStrings: ILocalizationStrings = {
     variables: 'Query Variables',
     headers: 'HTTP Headers',
     input: 'Type JSON URL',
+
+    schema_btn: 'Schema',
   },
   ru: {
     loginBtn: 'Войти',
@@ -137,6 +139,8 @@ const localizationStrings: ILocalizationStrings = {
     variables: 'Переменные запроса',
     headers: 'HTTP-заголовки',
     input: 'Введите URL-адрес для получения JSON',
+
+    schema_btn: 'Схема',
   },
 };
 

@@ -23,6 +23,8 @@ interface ILocalizationStrings {
     variables: string;
     headers: string;
     input: string;
+
+    schema_btn: string;
   };
   ru: {
     loginBtn: string;
@@ -48,6 +50,8 @@ interface ILocalizationStrings {
     variables: string;
     headers: string;
     input: string;
+
+    schema_btn: string;
   };
 }
 

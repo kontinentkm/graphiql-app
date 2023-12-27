@@ -76,6 +76,10 @@ const Main: FC = (): JSX.Element => {
     onSourceChanging();
   };
 
+  const onSchemaBtnClick = (): void => {
+    console.log(schema);
+  };
+
   return (
     <div>
       <div className={styles.main_container}>
@@ -86,6 +90,9 @@ const Main: FC = (): JSX.Element => {
           </button>
           <button className={styles.results_btn} onClick={onGetResultsClick}>
             {localizationStrings[lang].results_btn}
+          </button>
+          <button className={styles.results_btn} onClick={onSchemaBtnClick}>
+            {localizationStrings[lang].schema_btn}
           </button>
           <div className={styles.input_block}>
             <input
@@ -105,7 +112,7 @@ const Main: FC = (): JSX.Element => {
               )}
             </datalist>
             <div className={styles.search_btn}>
-              <FaSearch />
+              <FaSearch onClick={onSourceBlur} />
             </div>
           </div>
         </div>
