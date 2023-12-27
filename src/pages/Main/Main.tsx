@@ -30,10 +30,10 @@ const Main: FC = (): JSX.Element => {
   const [headers, setHeaders] = useState<string>('');
   const [results, setResults] = useState<string>('');
   const [schemaVisibility, setSchemaVisibility] = useState<boolean>(false);
+  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
 
   const sourceRef = useRef<HTMLInputElement | null>(null);
   const source = useRef<string>('');
-  const schema = useRef<GraphQLSchema | null>(null);
 
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
@@ -67,7 +67,7 @@ const Main: FC = (): JSX.Element => {
       lang,
       source.current
     );
-    schema.current = data;
+    setSchema(data);
   };
 
   const onSourceBlur = (): void => {
@@ -131,7 +131,7 @@ const Main: FC = (): JSX.Element => {
         onHeadersChange={setHeaders}
       />
       <SchemaWindow
-        schema={schema.current}
+        schema={schema}
         visible={schemaVisibility}
         onCloseClick={onSchemaBtnClick}
       />
