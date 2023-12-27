@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
+import { GraphQLSchema } from 'graphql';
 
 import styles from '@src/pages/Main/Main.module.css';
 
@@ -23,12 +24,13 @@ import getSchema from '@src/services/ApiSchemaService';
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
-  const [query, setQuery] = useState('');
-  const [variables, setVariables] = useState('');
-  const [headers, setHeaders] = useState('');
-  const [results, setResults] = useState('');
+  const [query, setQuery] = useState<string>('');
+  const [variables, setVariables] = useState<string>('');
+  const [headers, setHeaders] = useState<string>('');
+  const [results, setResults] = useState<string>('');
   const sourceRef = useRef<HTMLInputElement | null>(null);
-  const source = useRef('');
+  const source = useRef<string>('');
+  const schema = useRef<GraphQLSchema | null>(null);
 
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
@@ -55,14 +57,14 @@ const Main: FC = (): JSX.Element => {
     if (newSource === source.current) return;
 
     source.current = newSource;
-    const data = await toastFuncWrapper(
+    const data: GraphQLSchema | null = await toastFuncWrapper(
       getSchema,
       toastMessages[lang].loading_msg,
       toastMessages[lang].schema_load_success_msg,
       lang,
       source.current
     );
-    console.log(data);
+    schema.current = data;
   };
 
   const onSourceBlur = (): void => {

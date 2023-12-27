@@ -1,105 +1,28 @@
 import { toastMessages } from '@src/constants/localizationStrings';
 import { LocalizedError } from '@src/types/errorsClasses';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import {
+  GraphQLSchema,
+  IntrospectionQuery,
+  buildClientSchema,
+  getIntrospectionQuery,
+} from 'graphql';
 
-const query = `query IntrospectionQuery {
-  __schema {
-    queryType { name }
-    mutationType { name }
-    subscriptionType { name }
-    types {
-      ...FullType
-    }
-    directives {
-      name
-      locations
-      args {
-        ...InputValue
-      }
-    }
-  }
-}
-
-fragment FullType on __Type {
-  kind
-  name
-  fields(includeDeprecated: true) {
-    name
-    args {
-      ...InputValue
-    }
-    type {
-      ...TypeRef
-    }
-    isDeprecated
-    deprecationReason
-  }
-  inputFields {
-    ...InputValue
-  }
-  interfaces {
-    ...TypeRef
-  }
-  enumValues(includeDeprecated: true) {
-    name
-    isDeprecated
-    deprecationReason
-  }
-  possibleTypes {
-    ...TypeRef
-  }
-}
-
-fragment InputValue on __InputValue {
-  name
-  type { ...TypeRef }
-  defaultValue
-}
-
-fragment TypeRef on __Type {
-  kind
-  name
-  ofType {
-    kind
-    name
-    ofType {
-      kind
-      name
-      ofType {
-        kind
-        name
-        ofType {
-          kind
-          name
-          ofType {
-            kind
-            name
-            ofType {
-              kind
-              name
-              ofType {
-                kind
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`;
-
-const getSchema = async (source: string) => {
+const getSchema = async (source: string): Promise<GraphQLSchema> => {
   const body: Record<string, string | Record<string, string>> = {
-    query,
+    query: getIntrospectionQuery(),
+  };
+
+  const config: Record<string, string | Record<string, string>> = {
+    headers: { 'Content-Type': 'application/json' },
   };
 
   try {
-    const response = await axios.post(source, body);
-    const data = await response.data;
+    const response: AxiosResponse = await axios.post(source, body, config);
+    const json: IntrospectionQuery = response.data.data;
+    const graphqlSchemaObj: GraphQLSchema = buildClientSchema(json);
 
-    return JSON.stringify(data, undefined, 2);
+    return graphqlSchemaObj;
   } catch (err) {
     throw new LocalizedError({
       en: toastMessages.en.schema_load_err_msg,
