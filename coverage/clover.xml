@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1703755881582" clover="3.2.0">
+  <project timestamp="1703755881582" name="All files">
+    <metrics statements="10" coveredstatements="8" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="2" elements="15" coveredelements="10" complexity="0" loc="10" ncloc="10" packages="2" files="2" classes="2"/>
+    <package name="CustomButton">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="CustomButton.tsx" path="D:\JS_Learning\graphiql-app\src\UI\CustomButton\CustomButton.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Toggler">
+      <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="Toggler.tsx" path="D:\JS_Learning\graphiql-app\src\UI\Toggler\Toggler.tsx">
+        <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
