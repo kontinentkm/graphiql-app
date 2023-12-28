@@ -1,7 +1,18 @@
-import { FC, MouseEventHandler, useEffect, useState } from 'react';
+import {
+  FC,
+  MouseEventHandler,
+  Suspense,
+  lazy,
+  useEffect,
+  useState,
+} from 'react';
 import { GraphQLSchema } from 'graphql';
 
 import styles from './SchemaWindow.module.css';
+
+import LoaderSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+
+const SchemaView = lazy(() => import('@src/components/SchemaView/SchemaView'));
 
 const SchemaWindow: FC<{
   schema: GraphQLSchema | null;
@@ -43,15 +54,12 @@ const SchemaWindow: FC<{
         <button onClick={onCloseClick}>X</button>
       </div>
       <br />
-      <div className={styles.content}>
-        <ul>
-          <li onClick={onLiClick}>First</li>
-          <li onClick={onLiClick}>Second</li>
-          <li onClick={onLiClick}>Third</li>
-        </ul>
-        <br />
-        <div>{history.at(-1) || firstHistoryItem}</div>
-      </div>
+      {visible && (
+        <Suspense fallback={<LoaderSpinner />}>
+          <h2>Preview</h2>
+          <SchemaView schema={schema} onItemClick={onLiClick} />
+        </Suspense>
+      )}
     </article>
   );
 };
