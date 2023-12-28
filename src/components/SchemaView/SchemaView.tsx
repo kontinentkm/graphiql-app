@@ -1,12 +1,14 @@
-import { FC, MouseEventHandler } from 'react';
-import { GraphQLSchema } from 'graphql';
+import { FC } from 'react';
 
-const SchemaView: FC<{
-  schema: GraphQLSchema | null;
-  onItemClick: MouseEventHandler;
-}> = ({ schema }): JSX.Element => {
+import ISchemaViewProps from '@src/types/interfaces/ISchemaViewProps';
+import { printSchema } from 'graphql';
+
+const SchemaView: FC<ISchemaViewProps> = ({ schema }): JSX.Element => {
   return (
-    <div>{schema ? JSON.stringify(schema) : 'There is no schema yet'}</div>
+    <textarea
+      disabled
+      defaultValue={schema ? printSchema(schema) : 'There is no schema yet'}
+    ></textarea>
   );
 };
 
