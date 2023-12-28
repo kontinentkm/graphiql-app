@@ -21,6 +21,7 @@ import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
 
 import defaultAPIsUrl from '@src/constants/defaultAPIsURL';
 import getSchema from '@src/services/ApiSchemaService';
+import { toast } from 'react-toastify';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -37,6 +38,11 @@ const Main: FC = (): JSX.Element => {
 
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
+    if (!source.current) {
+      toast.warning(toastMessages[lang].empty_source_err_msg);
+      return;
+    }
+
     const data: string | null = await toastFuncWrapper(
       getData,
       toastMessages[lang].loading_msg,
@@ -58,6 +64,12 @@ const Main: FC = (): JSX.Element => {
   const onSourceChanging = async (): Promise<void> => {
     const newSource = sourceRef.current?.value || '';
     if (newSource === source.current) return;
+
+    if (!newSource) {
+      toast.warning(toastMessages[lang].empty_source_err_msg);
+      setSchema(null);
+      return;
+    }
 
     source.current = newSource;
     const data: GraphQLSchema | null = await toastFuncWrapper(

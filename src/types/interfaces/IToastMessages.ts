@@ -13,6 +13,7 @@ interface IToastMessages {
     logout_success_msg: string;
     schema_load_err_msg: string;
     schema_load_success_msg: string;
+    empty_source_err_msg: string;
   };
   ru: {
     loading_msg: string;
@@ -28,6 +29,7 @@ interface IToastMessages {
     logout_success_msg: string;
     schema_load_err_msg: string;
     schema_load_success_msg: string;
+    empty_source_err_msg: string;
   };
 }
 
