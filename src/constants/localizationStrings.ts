@@ -95,6 +95,7 @@ const localizationStrings: ILocalizationStrings = {
     input: 'Type JSON URL',
 
     schema_btn: 'Schema',
+    no_schema_msg: 'There is no schema yet',
   },
   ru: {
     loginBtn: 'Войти',
@@ -146,6 +147,7 @@ const localizationStrings: ILocalizationStrings = {
     input: 'Введите URL-адрес для получения JSON',
 
     schema_btn: 'Схема',
+    no_schema_msg: 'Пока нет доступной схемы от API',
   },
 };
 

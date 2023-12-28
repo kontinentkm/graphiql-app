@@ -68,6 +68,7 @@ const Main: FC = (): JSX.Element => {
     if (!newSource) {
       toast.warning(toastMessages[lang].empty_source_err_msg);
       setSchema(null);
+      source.current = newSource;
       return;
     }
 
