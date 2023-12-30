@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 
-interface IButtonProps {
+export interface IButtonProps {
   type: 'submit' | 'reset' | 'button' | undefined;
   label: string | number;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
