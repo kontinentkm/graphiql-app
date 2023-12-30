@@ -1,15 +1,22 @@
-import { ReactNode, useEffect, useState } from 'react';
-import CustomButton from '@src/UI/CustomButton/CustomButton';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '@src/firebase';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { auth, login, logout } from '@src/firebase';
+import { useSelector } from 'react-redux';
+
+import CustomButton from '@src/UI/CustomButton/CustomButton';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+
 import { ILoginInputs } from '@src/types/interfaces/ILoginInputs';
-import { FirebaseError } from 'firebase/app';
+import { toastMessages } from '@src/constants/localizationStrings';
+import { Localization } from '@src/types/types';
+
+import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+
 interface ILoginProps {
   children?: ReactNode;
 }
@@ -28,6 +35,8 @@ const schema = yup.object({
 });
 
 const Login: React.FC<ILoginProps> = () => {
+  const lang: Localization = useSelector(selectLocalization);
+
   const {
     register,
     handleSubmit,
@@ -38,27 +47,29 @@ const Login: React.FC<ILoginProps> = () => {
 
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     trigger();
   }, [setValue, trigger]);
 
   const signIn = async (data: ILoginInputs) => {
-    try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-    } catch (error) {
-      setErrorMessage('Check your credentials');
-      console.error(`error:`, (error as FirebaseError)?.message);
-    }
+    toastFuncWrapper(
+      login,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].login_success_msg,
+      lang,
+      data.email,
+      data.password
+    );
   };
 
   const signOutUser = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error(error);
-    }
+    toastFuncWrapper(
+      logout,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].logout_success_msg,
+      lang
+    );
   };
 
   if (loading) {
@@ -114,7 +125,6 @@ const Login: React.FC<ILoginProps> = () => {
               <CustomButton label="Login" type="submit" disabled={!isValid} />
             </div>
           </form>
-          {errorMessage && <div className="text-red-800">{errorMessage}</div>}
           <div className="flex flex-col gap-4 text-center mt-4">
             Don&apos;t have an account?
             <CustomButton

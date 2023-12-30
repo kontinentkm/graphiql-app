@@ -2,11 +2,13 @@ import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
   signOut,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { LocalizedError } from './types/errorsClasses';
+import { toastMessages } from './constants/localizationStrings';
 
 const firebaseConfig = {
   apiKey: `AIzaSyDdmV4QVXAhN-mcJxhx6w-qxR-lN6AGwi0`,
@@ -25,7 +27,7 @@ const registerWithEmailAndPassword = async (
   name: string,
   email: string,
   password: string
-) => {
+): Promise<void> => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -35,22 +37,34 @@ const registerWithEmailAndPassword = async (
       authProvider: 'local',
       email,
     });
-  } catch (err) {
-    console.error(err);
+  } catch {
+    throw new LocalizedError({
+      en: toastMessages.en.registration_error_msg,
+      ru: toastMessages.ru.registration_error_msg,
+    });
   }
 };
 
-const sendPasswordReset = async (email: string) => {
+const logout = async (): Promise<void> => {
   try {
-    await sendPasswordResetEmail(auth, email);
-    alert('Password reset link sent!');
-  } catch (err) {
-    console.error(err);
+    await signOut(auth);
+  } catch {
+    throw new LocalizedError({
+      en: toastMessages.en.logout_error_msg,
+      ru: toastMessages.ru.logout_error_msg,
+    });
   }
 };
 
-const logout = () => {
-  signOut(auth);
+const login = async (email: string, password: string): Promise<void> => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    throw new LocalizedError({
+      en: toastMessages.en.login_error_msg,
+      ru: toastMessages.ru.login_error_msg,
+    });
+  }
 };
 
-export { auth, db, registerWithEmailAndPassword, sendPasswordReset, logout };
+export { auth, db, registerWithEmailAndPassword, logout, login };

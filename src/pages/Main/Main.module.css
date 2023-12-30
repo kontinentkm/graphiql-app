@@ -1,4 +1,8 @@
 .main_container {
+  /*needed for schema hide-show effect*/
+  position: relative;
+  overflow: hidden;
+  /*__________________________________*/
   margin-top: 2rem;
   padding: 0 1rem;
   max-width: 1240px;
@@ -54,36 +58,3 @@
   margin-left: 1rem;
   white-space: nowrap;
 }
-
-/* .execute_btn_container {
-  display: flex;
-  justify-content: center;
-}
-
-.execute_btn {
-  cursor: pointer;
-}
-
-.execute_btn svg {
-  width: 3rem;
-  height: 3rem;
-  fill: #555;
-}
-
-.execute_btn svg:hover {
-  fill: #989898;
-  transition: 0.2s;
-}
-
-.execute_btn svg:active {
-  fill: #ddd;
-  transition: 0.2s;
-}
-
-.editor_container {
-  margin-top: 0.3rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  height: 100%;
-} */
