@@ -5,9 +5,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { FirebaseError } from '@firebase/util';
 import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import { useSelector } from 'react-redux';
+import { Localization } from '@src/types/types';
+import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
+import { toastMessages } from '@src/constants/localizationStrings';
 
 interface IRegisterProps {
   children?: ReactNode;
@@ -28,6 +32,8 @@ const schema = yup.object({
 });
 
 const Register: React.FC<IRegisterProps> = () => {
+  const lang: Localization = useSelector(selectLocalization);
+
   const {
     register,
     handleSubmit,
@@ -48,14 +54,15 @@ const Register: React.FC<IRegisterProps> = () => {
   }, [setValue, trigger, errorMessage]);
 
   const createAccount = async (data: IRegisterInputs) => {
-    try {
-      await registerWithEmailAndPassword(data.name, data.email, data.password);
-    } catch (error) {
-      setErrorMessage(
-        (error as FirebaseError)?.message || 'An unknown error occurred'
-      );
-      console.error(error);
-    }
+    toastFuncWrapper(
+      registerWithEmailAndPassword,
+      toastMessages[lang].loading_msg,
+      toastMessages[lang].registration_success_msg,
+      lang,
+      data.name,
+      data.email,
+      data.password
+    );
   };
 
   return (

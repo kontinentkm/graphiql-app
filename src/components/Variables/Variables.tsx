@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FunctionComponent as FC } from 'react';
-import IVariables from './IVariables';
+import IVariablesProps from '@src/types/interfaces/IVariablesProps';
 import './Variables.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -13,7 +13,12 @@ import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSli
 import { Localization } from '@src/types/types';
 import { useSelector } from 'react-redux';
 
-const Variables: FC<IVariables> = ({}) => {
+const Variables: FC<IVariablesProps> = ({
+  variablesValue,
+  headersValue,
+  onVariablesChange,
+  onHeadersChange,
+}): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
   const [showVariables, setshowVariables] = useState(true);
@@ -31,6 +36,18 @@ const Variables: FC<IVariables> = ({}) => {
     setshowVariables(false);
     setShowHeaders(true);
   };
+
+  const handleVariablesChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onVariablesChange(value);
+
+  const handleHeadersChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onHeadersChange(value);
 
   return (
     <div className="variables_block">
@@ -56,8 +73,8 @@ const Variables: FC<IVariables> = ({}) => {
       {showVariables && (
         <CodeMirror
           className="variables_pane"
-          onChange={() => {}}
-          value=""
+          onChange={handleVariablesChange}
+          value={variablesValue}
           options={{
             mode: 'xml',
             theme: 'material',
@@ -67,8 +84,8 @@ const Variables: FC<IVariables> = ({}) => {
       )}
       {showHeaders && (
         <CodeMirror
-          onChange={() => {}}
-          value=""
+          onChange={handleHeadersChange}
+          value={headersValue}
           options={{
             mode: 'xml',
             theme: 'material',

@@ -1,37 +1,55 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FunctionComponent as FC } from 'react';
-import IEdit from './IEdit';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/mode/xml/xml';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/css/css';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
-import './Edit.css';
-import localizationStrings from '@src/constants/localizationStrings';
-import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
-import { Localization } from '@src/types/types';
 import { useSelector } from 'react-redux';
 
-const Edit: FC<IEdit> = ({}) => {
+import '@src/components/Edit/Edit.css';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/xml/xml';
+import 'codemirror/mode/javascript/javascript';
+import { UnControlled as CodeMirror } from 'react-codemirror2';
+
+import IEditProps from '@src/types/interfaces/IEditProps';
+import { Localization } from '@src/types/types';
+
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+
+import localizationStrings from '@src/constants/localizationStrings';
+
+const Edit: FC<IEditProps> = ({
+  queryValue,
+  resultsValue,
+  onQueryChange,
+  onResultChange,
+}): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
 
-  const [queryValue, setQueryValue] = useState('');
-  const [showQuery, setshowQuery] = useState(true);
+  const [showQuery, setShowQuery] = useState(true);
   const [showResults, setShowResults] = useState(false);
   const [activeButton, setActiveButton] = useState('query');
 
-  const handleBtnQueryClick = () => {
+  const handleBtnQueryClick = (): void => {
     setActiveButton('query');
-    setshowQuery(true);
+    setShowQuery(true);
     setShowResults(false);
   };
 
-  const handleBtnResultsClick = () => {
+  const handleBtnResultsClick = (): void => {
     setActiveButton('results');
-    setshowQuery(false);
+    setShowQuery(false);
     setShowResults(true);
   };
+
+  const handleQueryChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onQueryChange(value);
+
+  const handleResultChange = (e: ChangeEvent<HTMLTextAreaElement>): void =>
+    onResultChange(e.target.value);
 
   return (
     <div className="edit_blocks">
@@ -56,7 +74,7 @@ const Edit: FC<IEdit> = ({}) => {
 
       {showQuery && (
         <CodeMirror
-          onChange={(editor, data, value) => setQueryValue(value)}
+          onChange={handleQueryChange}
           value={queryValue}
           options={{
             mode: 'xml',
@@ -66,7 +84,11 @@ const Edit: FC<IEdit> = ({}) => {
         />
       )}
       {showResults && (
-        <div className="edit_block_results">Загрузка данных...</div>
+        <textarea
+          value={resultsValue}
+          onChange={handleResultChange}
+          className="edit_block_results"
+        ></textarea>
       )}
     </div>
   );
