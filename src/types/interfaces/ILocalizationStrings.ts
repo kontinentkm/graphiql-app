@@ -17,7 +17,6 @@ interface ILocalizationStrings {
     edit_btn_results: string;
     variables_btn: string;
     headers_btn: string;
-
     execute_btn: string;
     query: string;
     variables: string;
@@ -25,6 +24,8 @@ interface ILocalizationStrings {
     input: string;
     login: string[];
     register: string[];
+    schema_btn: string;
+    no_schema_msg: string;
   };
   ru: {
     loginBtn: string;
@@ -44,7 +45,6 @@ interface ILocalizationStrings {
     edit_btn_results: string;
     variables_btn: string;
     headers_btn: string;
-
     execute_btn: string;
     query: string;
     variables: string;
@@ -52,6 +52,8 @@ interface ILocalizationStrings {
     input: string;
     login: string[];
     register: string[];
+    schema_btn: string;
+    no_schema_msg: string;
   };
 }
 

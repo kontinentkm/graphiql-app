@@ -14,19 +14,19 @@ export const prettifyCode = (query: string, indentation = 2) => {
     if (trimmedLine.endsWith('{')) {
       const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
       currentIndentation += indentation;
-      return indentedLine.replace(/\{\s*$/, ' {');
+      return indentedLine;
     }
 
     if (trimmedLine.endsWith('}')) {
+      currentIndentation = Math.max(0, currentIndentation - indentation);
       const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
-      currentIndentation += indentation;
-      return indentedLine.replace(/\{\s*$/, ' }');
+      return indentedLine;
     }
 
     if (trimmedLine === '}') {
-      currentIndentation = Math.max(0, currentIndentation - indentation);
       const lastLine = index === lines.length - 1;
       const newLine = lastLine ? '' : '\n';
+      currentIndentation = Math.max(0, currentIndentation - indentation);
       return ' '.repeat(currentIndentation) + trimmedLine + newLine;
     }
 
@@ -35,8 +35,6 @@ export const prettifyCode = (query: string, indentation = 2) => {
 
     return indentedLine;
   });
-
-  formattedLines.forEach((line) => line.trim());
 
   return formattedLines.join('\n');
 };

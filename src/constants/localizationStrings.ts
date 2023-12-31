@@ -1,4 +1,47 @@
 import ILocalizationStrings from '@src/types/interfaces/ILocalizationStrings';
+import IToastMessages from '@src/types/interfaces/IToastMessages';
+
+export const toastMessages: IToastMessages = {
+  en: {
+    loading_msg: 'Handling request...',
+    registration_error_msg: 'Error on registration',
+    login_error_msg: 'Error on log in',
+    registration_success_msg: 'Successfull registration',
+    login_success_msg: 'Successfull log in',
+    headers_editor_error_msg:
+      'SyntaxError while headers parsing! Headers object must be valid JSON!',
+    variables_editor_error_msg:
+      'SyntaxError while variables parsing! Variables object must be valid JSON!',
+    get_data_error: 'Error while data fetching from API',
+    get_data_success: 'Successfull data fetching from API',
+    logout_error_msg: 'Error on log out',
+    logout_success_msg: 'Successfull log out',
+    schema_load_err_msg: 'Error on schema loading',
+    schema_load_success_msg: 'Successfull schema loading',
+
+    empty_source_err_msg: 'To do request you must enter a API source url!',
+  },
+  ru: {
+    loading_msg: 'Обработка запроса...',
+    registration_error_msg: 'Ошибка при регистрации',
+    login_error_msg: 'Ошибка при входе',
+    registration_success_msg: 'Успешная регистрация',
+    login_success_msg: 'Успешный вход',
+    headers_editor_error_msg:
+      'Синтаксическая ошибка! Заголовки должны быть валидным JSON объектом!',
+    variables_editor_error_msg:
+      'Синтаксическая ошибка! Переменные должны быть валидным JSON объектом!',
+    get_data_success: 'Успешное получение данных от API',
+    get_data_error: 'Ошибка при получении данных от API',
+    logout_error_msg: 'Ошибка при выходе',
+    logout_success_msg: 'Успешный выход',
+    schema_load_err_msg: 'Ошибка при загрузке схемы',
+    schema_load_success_msg: 'Успешная загрузка схемы',
+
+    empty_source_err_msg:
+      'Чтобы делать запросы вы должны ввести url-адрес API!',
+  },
+};
 
 const localizationStrings: ILocalizationStrings = {
   en: {
@@ -65,6 +108,8 @@ const localizationStrings: ILocalizationStrings = {
       'Password',
       'Create account',
     ],
+    schema_btn: 'Schema',
+    no_schema_msg: 'There is no schema yet',
   },
   ru: {
     loginBtn: 'Войти',
@@ -129,6 +174,8 @@ const localizationStrings: ILocalizationStrings = {
       'Пароль',
       'Создать аккаунт',
     ],
+    schema_btn: 'Схема',
+    no_schema_msg: 'Пока нет доступной схемы от API',
   },
 };
 
