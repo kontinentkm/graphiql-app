@@ -3,13 +3,13 @@ import { LocalizedError } from '@src/types/errorsClasses';
 import { Localization } from '@src/types/types';
 import { Id, toast } from 'react-toastify';
 
-const toastFuncWrapper = async <T extends CallableFunction>(
-  func: T,
+const toastFuncWrapper = async (
+  func: CallableFunction,
   loadingMsg: string,
   successMsg: string,
   lang: Localization,
   ...args: typeof func.arguments
-): Promise<ReturnType<T> | null> => {
+) => {
   const toastID: Id = toast.loading(loadingMsg, toastSettings);
 
   try {
