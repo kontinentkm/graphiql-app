@@ -3,17 +3,17 @@ import { LocalizedError } from '@src/types/errorsClasses';
 import { Localization } from '@src/types/types';
 import { Id, toast } from 'react-toastify';
 
-const toastFuncWrapper = async <T extends CallableFunction>(
-  func: T,
+const toastFuncWrapper = async <T, R>(
+  func: (...args: T[]) => R,
   loadingMsg: string,
   successMsg: string,
   lang: Localization,
   ...args: typeof func.arguments
-): Promise<ReturnType<T> | null> => {
+): Promise<R | null> => {
   const toastID: Id = toast.loading(loadingMsg, toastSettings);
 
   try {
-    const data = await func(...args);
+    const data = await func(args);
 
     toast.update(toastID, {
       render: successMsg + '👌',

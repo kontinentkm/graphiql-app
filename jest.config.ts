@@ -11,7 +11,7 @@ const config: Config = {
     '.+\\.(css|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^@src(.*)$': '<rootDir>/src$1',
   },
-  modulePathIgnorePatterns: ['__mocks__'],
+  modulePathIgnorePatterns: ['__mocks__', 'types'],
   setupFilesAfterEnv: ['./jest-setup.ts'],
 };
 
