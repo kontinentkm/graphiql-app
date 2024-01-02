@@ -8,9 +8,14 @@
 .variables_btn {
   cursor: pointer;
   padding: 1rem;
+  font-size: 1.6rem;
 }
 
 .active_btn {
   background-color: var(--variables-active-btn-bg);
   transition: 0.2s;
+}
+
+.font_size {
+  font-size: 1.6rem;
 }

@@ -16,6 +16,7 @@
 .edit_btn {
   cursor: pointer;
   padding: 1rem;
+  font-size: 1.6rem;
 }
 
 .active_btn {
@@ -32,4 +33,9 @@
   display: block;
   resize: none;
   overflow: auto;
+  font-size: 1.6rem;
+}
+
+.edit_block_query {
+  font-size: 1.6rem;
 }
