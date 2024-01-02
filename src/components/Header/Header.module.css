@@ -5,17 +5,15 @@
   top: 0;
   left: 0;
   width: 100%;
-  /*the properties above is necessary for sticky header*/
 
-  background-color: #0000008c;
+  background-color: var(--header-bg-color);
   transition: all 0.4s ease;
   z-index: 1000;
   height: var(--header-height);
 }
 
-/*this "scroll" class is necessary for sticky header too, but transformations may be any*/
 .header.scroll {
-  background-color: rgb(0, 0, 47);
+  background-color: var(--header-onScroll-bg);
 }
 
 .header * {
