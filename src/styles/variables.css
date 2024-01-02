@@ -1,4 +1,13 @@
 :root {
   --header-height: 5.5rem;
-  /*the properties above is necessary for sticky header*/
+  
+  --primary-text-color: rgba(255, 255, 255, 0.87);
+  --primary-bg-color: #242424;
+  --link-color: #646cff;
+  --link-hovered-color: #535bf2;
+  --link-active-color: #ff0000;
+  --btn-bg-color: #1a1a1a;
+
+  --base-font-size: 14px;
+  --primary-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
