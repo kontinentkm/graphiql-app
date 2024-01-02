@@ -8,6 +8,6 @@
   --link-active-color: #ff0000;
   --btn-bg-color: #1a1a1a;
 
-  --base-font-size: 14px;
+  --base-font-size: calc(0.3vw + 0.5vh + 4px);
   --primary-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
