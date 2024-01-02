@@ -1,5 +1,6 @@
 :root {
-  --header-height: 5.5rem;
+  --header-height: 6rem;
+  --header-less500px-height: 15rem;
   
   --primary-text-color: #ffffffde;
   --primary-bg-color: #242424;

@@ -28,6 +28,10 @@
 }
 
 .header a {
+  font-size: 2rem;
+}
+
+.header button {
   font-size: 1.8rem;
 }
 
@@ -38,7 +42,7 @@
 
 .title {
   margin-right: auto;
-  font-size: 2.2rem;
+  font-size: 3rem;
   text-wrap: nowrap;
   text-align: center;
 }
@@ -47,4 +51,24 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+@media screen and (max-width: 570px){
+  .wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header {
+    height: var(--header-less500px-height);
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: center;
+  }
 }
