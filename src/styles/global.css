@@ -78,3 +78,7 @@ a.active {
   text-decoration: underline;
   pointer-events: none;
 }
+
+.custom_toast {
+  font-size: 1.6rem;
+}

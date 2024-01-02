@@ -9,6 +9,7 @@ const toastSettings: ToastOptions = {
   draggable: true,
   progress: undefined,
   theme: 'dark',
+  className: 'custom_toast',
 };
 
 const toastContainerSettings: ToastContainerProps = {
