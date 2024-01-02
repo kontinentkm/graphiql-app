@@ -1,6 +1,8 @@
+@import url('@src/styles/variables.css');
+
 .variables_btns {
   display: flex;
-  background-color: #1b2328;
+  background-color: var(--variables-btns-container-bg);
 }
 
 .variables_btn {
@@ -9,6 +11,6 @@
 }
 
 .active_btn {
-  background-color: #263238;
+  background-color: var(--variables-active-btn-bg);
   transition: 0.2s;
 }

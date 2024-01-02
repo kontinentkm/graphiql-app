@@ -1,3 +1,5 @@
+@import url('@src/styles/variables.css');
+
 .main_container {
   /*needed for schema hide-show effect*/
   position: relative;
@@ -25,7 +27,7 @@
   padding-right: 2.2rem;
   padding-left: 0.5rem;
   margin-left: 1rem;
-  background-color: #263238;
+  background-color: var(--variables-active-btn-bg);
   height: 2rem;
   width: 100%;
 }
@@ -41,16 +43,16 @@
 .search_btn svg {
   width: 1.4rem;
   height: 1.4rem;
-  fill: #555;
+  fill: var(--search-btn-color);
 }
 
 .search_btn svg:hover {
-  fill: #989898;
+  fill: var(--search-btn-hovered-color);
   transition: 0.2s;
 }
 
 .search_btn svg:active {
-  fill: #ddd;
+  fill: var(--search-btn-active-color);
   transition: 0.2s;
 }
 
