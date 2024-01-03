@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 
-interface IButtonProps {
+export interface IButtonProps {
   type: 'submit' | 'reset' | 'button' | undefined;
   label: string | number;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -15,7 +15,7 @@ export default function CustomButton({
 }: IButtonProps) {
   return (
     <button
-      className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-teal-300 disabled:cursor-none disabled:opacity-75"
+      className="bg-blue-500 text-white text-2xl px-4 py-2 rounded-md cursor-pointer hover:bg-teal-300 disabled:cursor-none disabled:opacity-75"
       onClick={onClick}
       type={type}
       disabled={disabled}

@@ -74,6 +74,7 @@ const Edit: FC<IEditProps> = ({
 
       {showQuery && (
         <CodeMirror
+          className="edit_block_query"
           onChange={handleQueryChange}
           value={queryValue}
           options={{
@@ -85,6 +86,7 @@ const Edit: FC<IEditProps> = ({
       )}
       {showResults && (
         <textarea
+          disabled
           value={resultsValue}
           onChange={handleResultChange}
           className="edit_block_results"

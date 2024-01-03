@@ -3,6 +3,8 @@ import { FC } from 'react';
 import styles from '@src/UI/Toggler/Toggler.module.css';
 import ITogglerProps from '@src/types/interfaces/ITogglerProps';
 
+import { TOGGLER_TEST_ID } from '@src/__tests__/__mocks__/testIDs';
+
 const Toggler: FC<ITogglerProps> = ({
   callback,
   on,
@@ -17,7 +19,7 @@ const Toggler: FC<ITogglerProps> = ({
   };
 
   return (
-    <label className={styles.switch}>
+    <label data-testid={TOGGLER_TEST_ID} className={styles.switch}>
       <input
         checked={initialState === on}
         type="checkbox"

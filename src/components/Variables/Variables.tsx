@@ -72,7 +72,7 @@ const Variables: FC<IVariablesProps> = ({
 
       {showVariables && (
         <CodeMirror
-          className="variables_pane"
+          className="variables_pane font_size"
           onChange={handleVariablesChange}
           value={variablesValue}
           options={{
@@ -84,6 +84,7 @@ const Variables: FC<IVariablesProps> = ({
       )}
       {showHeaders && (
         <CodeMirror
+          className="font_size"
           onChange={handleHeadersChange}
           value={headersValue}
           options={{
