@@ -1,9 +1,11 @@
+@import url('@src/styles/variables.css');
+
 .wrapper {
   position: absolute;
   right: 0;
   top: 0;
-  max-width: 400px;
-  width: 90%;
+  max-width: 45rem;
+  width: 100%;
   height: 80vh;
   overflow: auto;
   padding: 0.75rem 0;
@@ -11,7 +13,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 1.25rem;
-  background-color: #0d0d0d;
+  background-color: var(--schema-bg-color);
   transform: translateX(150%);
   transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -21,7 +23,7 @@
 }
 
 .wrapper button {
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .content {
@@ -38,6 +40,7 @@
   background-color: transparent;
   resize: none;
   padding-left: 0.65rem;
+  font-size: 1.6rem;
 }
 
 .wrapper ::-webkit-scrollbar {
@@ -46,9 +49,9 @@
 }
 
 .wrapper ::-webkit-scrollbar-track {
-  background-color: rgb(103, 103, 103);
+  background-color: var(--schema-scroll-track-color);
 }
 
 .wrapper ::-webkit-scrollbar-thumb {
-  background-color: rgb(15, 0, 57);
+  background-color: var(--schema-scroll-thumb-color);
 }

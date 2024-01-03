@@ -1,3 +1,5 @@
+@import url('@src/styles/variables.css');
+
 .react-codemirror2 {
   height: 300px;
 }
@@ -8,21 +10,22 @@
 
 .edit_btns {
   display: flex;
-  background-color: #1b2328;
+  background-color: var(--variables-btns-container-bg);
 }
 
 .edit_btn {
   cursor: pointer;
   padding: 1rem;
+  font-size: 1.6rem;
 }
 
 .active_btn {
-  background-color: #263238;
+  background-color: var(--variables-active-btn-bg);
   transition: 0.2s;
 }
 
 .edit_block_results {
-  background-color: #263238;
+  background-color: var(--variables-active-btn-bg);
   height: 300px;
   padding-top: 0.5rem;
   padding-left: 1rem;
@@ -30,4 +33,9 @@
   display: block;
   resize: none;
   overflow: auto;
+  font-size: 1.6rem;
+}
+
+.edit_block_query {
+  font-size: 1.6rem;
 }

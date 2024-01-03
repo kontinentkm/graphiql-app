@@ -1,3 +1,5 @@
+@import url('@src/styles/variables.css');
+
 .switch {
   position: relative;
   display: inline-block;
@@ -16,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(255, 0, 0);
+  background-color: var(--link-active-color);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 5px
@@ -29,18 +31,18 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--primary-text-color);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 5px
 }
 
 input:checked+.slider {
-  background-color: #00c30d;
+  background-color: var(--link-color);
 }
 
 input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--link-hovered-color);
 }
 
 input:checked+.slider:before {
@@ -55,7 +57,7 @@ input:checked+.slider:before {
 
 .on,
 .off {
-  color: white;
+  color: var(--primary-text-color);
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
