@@ -1,40 +1,40 @@
 export const prettifyCode = (query: string, indentation = 2) => {
-  const lines = query.split('\n');
-  let currentIndentation = 0;
+  let formattedQuery = '';
+  let indentationLevel = 0;
+  let withinBraces = false;
 
-  const formattedLines = lines.map((line, index) => {
-    const trimmedLine = line.trim();
+  for (let i = 0; i < query.length; i++) {
+    const char = query[i];
 
-    if (/^(type|query|mutation)\s+\w+\s*{$/.test(trimmedLine)) {
-      const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
-      currentIndentation += indentation;
-      return indentedLine;
+    switch (char) {
+      case '{':
+        const indentedOpenBrace =
+          ' '.repeat(indentationLevel * indentation) + ' {\n';
+        formattedQuery += indentedOpenBrace;
+        indentationLevel++;
+        withinBraces = true;
+        break;
+      case '}':
+        indentationLevel = Math.max(0, indentationLevel - 1);
+        const indentedCloseBrace =
+          '\n' + ' '.repeat(indentationLevel * indentation) + '}';
+        formattedQuery += indentedCloseBrace;
+        withinBraces = false;
+        break;
+      case ',':
+        formattedQuery += withinBraces
+          ? ',\n' + ' '.repeat(indentationLevel * indentation)
+          : ', ';
+        break;
+      case '\n':
+      case '\r':
+      case '\t':
+      case ' ':
+        break;
+      default:
+        formattedQuery += formattedQuery.endsWith('query') ? ' ' + char : char;
     }
+  }
 
-    if (trimmedLine.endsWith('{')) {
-      const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
-      currentIndentation += indentation;
-      return indentedLine;
-    }
-
-    if (trimmedLine.endsWith('}')) {
-      currentIndentation = Math.max(0, currentIndentation - indentation);
-      const indentedLine = ' '.repeat(currentIndentation) + trimmedLine;
-      return indentedLine;
-    }
-
-    if (trimmedLine === '}') {
-      const lastLine = index === lines.length - 1;
-      const newLine = lastLine ? '' : '\n';
-      currentIndentation = Math.max(0, currentIndentation - indentation);
-      return ' '.repeat(currentIndentation) + trimmedLine + newLine;
-    }
-
-    const indentedLine =
-      ' '.repeat(currentIndentation) + trimmedLine.replace(/:\s*/, ': ');
-
-    return indentedLine;
-  });
-
-  return formattedLines.join('\n');
+  return formattedQuery;
 };
