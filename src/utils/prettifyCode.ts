@@ -9,7 +9,7 @@ export const prettifyCode = (query: string, indentation = 2) => {
     switch (char) {
       case '{':
         const indentedOpenBrace =
-          ' '.repeat(indentationLevel * indentation) + ' {\n';
+          ' '.repeat(indentationLevel * indentation) + ' {\n  ';
         formattedQuery += indentedOpenBrace;
         indentationLevel++;
         withinBraces = true;
@@ -27,6 +27,9 @@ export const prettifyCode = (query: string, indentation = 2) => {
           : ', ';
         break;
       case '\n':
+        withinBraces = true;
+        formattedQuery += withinBraces ? '  ' : '';
+        break;
       case '\r':
       case '\t':
       case ' ':
