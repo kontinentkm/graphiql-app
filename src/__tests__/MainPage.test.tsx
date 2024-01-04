@@ -9,7 +9,7 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }));
 
-describe('Welcome page', () => {
+describe('Main page', () => {
   it('Renders Main page with english localization', () => {
     (
       jest.requireMock('react-redux') as { useSelector: jest.Mock }
