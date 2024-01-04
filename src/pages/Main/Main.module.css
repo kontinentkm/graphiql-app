@@ -1,60 +1,63 @@
+@import url('@src/styles/variables.css');
+
 .main_container {
-  /*needed for schema hide-show effect*/
   position: relative;
   overflow: hidden;
-  /*__________________________________*/
+
   margin-top: 2rem;
-  padding: 0 1rem;
-  max-width: 1240px;
 }
 
 .top_block {
   margin-top: 1rem;
   display: flex;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .input_block {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  flex-grow: 1;
+  min-width: 30rem;
 }
 
 .input {
-  padding-right: 2.2rem;
-  padding-left: 0.5rem;
-  margin-left: 1rem;
-  background-color: #263238;
-  height: 2rem;
+  padding: 0.5rem 2.8rem 0.5rem 0.5rem;
+  margin-right: 0.1rem;
+  background-color: var(--variables-active-btn-bg);
   width: 100%;
+  font-size: 1.6rem;
 }
 
 .search_btn {
   position: absolute;
-  right: 0.3rem;
+  right: 0.8rem;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
 }
 
 .search_btn svg {
-  width: 1.4rem;
-  height: 1.4rem;
-  fill: #555;
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: var(--search-btn-color);
 }
 
 .search_btn svg:hover {
-  fill: #989898;
+  fill: var(--search-btn-hovered-color);
   transition: 0.2s;
 }
 
 .search_btn svg:active {
-  fill: #ddd;
+  fill: var(--search-btn-active-color);
   transition: 0.2s;
 }
 
-.results_btn {
-  margin-left: 1rem;
+.results_btn,
+.prettify_btn {
   white-space: nowrap;
+  font-size: 1.6rem;
+  padding: 0.5rem;
 }

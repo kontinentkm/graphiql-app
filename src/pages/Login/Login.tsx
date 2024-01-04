@@ -77,18 +77,18 @@ const Login: React.FC<ILoginProps> = () => {
   }
 
   return (
-    <div className="flex bg-green-400 justify-center items-center h-screen mx-auto p-5 rounded">
+    <div className="flex justify-center items-center mt-20 mx-auto rounded">
       {loading && <LoadingSpinner />}
       {!user ? (
         <div className="w-96">
-          <h2 className="text-3xl font-semibold text-center mb-4">
+          <h2 className="text-4xl font-semibold text-center mb-4">
             Enter your credentials
           </h2>
           <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
             <div id="email" className="mb-8">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-indigo-600 mb-2"
+                className="block text-3xl font-medium text-indigo-600 mb-2"
               >
                 Email
               </label>
@@ -97,16 +97,16 @@ const Login: React.FC<ILoginProps> = () => {
                 placeholder="Enter your email"
                 required
                 {...register('email')}
-                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+                className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
               />
-              <p className="text-black font-bold text-sm mt-1">
+              <p className="text-black font-bold text-xl mt-1 text-red-600">
                 {errors.email?.message}
               </p>
             </div>
             <div id="password" className="mb-8">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-indigo-600 mb-2"
+                className="block text-3xl font-medium text-indigo-600 mb-2"
               >
                 Password
               </label>
@@ -115,9 +115,9 @@ const Login: React.FC<ILoginProps> = () => {
                 placeholder="Enter your password"
                 required
                 {...register('password')}
-                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+                className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
               />
-              <p className="text-black font-bold text-sm mt-1">
+              <p className="text-black font-bold text-xl mt-1 text-red-600">
                 {errors.password?.message}
               </p>
             </div>
@@ -125,7 +125,7 @@ const Login: React.FC<ILoginProps> = () => {
               <CustomButton label="Login" type="submit" disabled={!isValid} />
             </div>
           </form>
-          <div className="flex flex-col gap-4 text-center mt-4">
+          <div className="flex flex-col gap-4 text-center mt-4 text-2xl">
             Don&apos;t have an account?
             <CustomButton
               label="Create account"

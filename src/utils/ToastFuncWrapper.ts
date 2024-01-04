@@ -13,7 +13,7 @@ const toastFuncWrapper = async <T, R>(
   const toastID: Id = toast.loading(loadingMsg, toastSettings);
 
   try {
-    const data = await func(args);
+    const data = await func(...args);
 
     toast.update(toastID, {
       render: successMsg + '👌',

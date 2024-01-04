@@ -10,7 +10,6 @@ const Welcome: FC = (): JSX.Element => {
 
   return (
     <div className={styles.welcome_container}>
-      <p>{localizationStrings[lang].welcome}</p>
       <h2 className={styles.team_title}>{localizationStrings[lang].ourTeam}</h2>
       <div className={styles.team_block}>
         {localizationStrings[lang].developers.map((developer) => (
