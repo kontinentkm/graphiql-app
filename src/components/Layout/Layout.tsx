@@ -6,10 +6,10 @@ import styles from '@src/components/Layout/Layout.module.css';
 
 import { capitalize } from '@src/utils/StringTransform';
 
-import favicon from '@src/assets/graphql.png';
-
 import Footer from '@src/components/Footer/Footer';
 import Header from '@src/components/Header/Header';
+
+const FAVICON_PATH = './favicon.ico';
 
 const Layout: FC = (): JSX.Element => {
   const { pathname } = useLocation();
@@ -17,7 +17,10 @@ const Layout: FC = (): JSX.Element => {
 
   return (
     <HelmetProvider>
-      <Helmet title={`${pageName}`} link={[{ rel: 'icon', href: favicon }]} />
+      <Helmet
+        title={`${pageName}`}
+        link={[{ rel: 'icon', href: FAVICON_PATH }]}
+      />
       <Header />
       <main className={styles.main}>
         <div className={styles.wrapper}>
