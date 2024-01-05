@@ -2,6 +2,7 @@ import { FC, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { GraphQLSchema } from 'graphql';
+import { toast } from 'react-toastify';
 
 import styles from '@src/pages/Main/Main.module.css';
 
@@ -18,10 +19,10 @@ import SchemaWindow from '@src/components/SchemaWindow/SchemaWindow';
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import getData from '@src/services/ApiDataService';
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
+import getSchema from '@src/services/ApiSchemaService';
 
 import defaultAPIsUrl from '@src/constants/defaultAPIsURL';
-import getSchema from '@src/services/ApiSchemaService';
-import { toast } from 'react-toastify';
+import { toastSettings } from '@src/constants/toastSettings';
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -39,7 +40,7 @@ const Main: FC = (): JSX.Element => {
   const onPrettifyClick = (): void => console.log('prettify');
   const onGetResultsClick = async (): Promise<void> => {
     if (!source.current) {
-      toast.warning(toastMessages[lang].empty_source_err_msg);
+      toast.warning(toastMessages[lang].empty_source_err_msg, toastSettings);
       return;
     }
 
@@ -66,7 +67,7 @@ const Main: FC = (): JSX.Element => {
     if (newSource === source.current) return;
 
     if (!newSource) {
-      toast.warning(toastMessages[lang].empty_source_err_msg);
+      toast.warning(toastMessages[lang].empty_source_err_msg, toastSettings);
       setSchema(null);
       source.current = newSource;
       return;
