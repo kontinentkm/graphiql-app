@@ -122,6 +122,7 @@ const Main: FC = (): JSX.Element => {
             className={styles.input}
             type="text"
             placeholder={localizationStrings[lang].input}
+            data-testid="suggestions"
             list="suggestions"
             onBlur={onSourceBlur}
             onKeyUp={onSourceKeyUp}
