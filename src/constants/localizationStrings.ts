@@ -96,7 +96,9 @@ const localizationStrings: ILocalizationStrings = {
     login: [
       'Enter your credentials',
       'Email',
+      'Enter your email',
       'Password',
+      'Enter your password',
       'Login',
       'Dont have an account?',
       'Create account',
@@ -162,7 +164,9 @@ const localizationStrings: ILocalizationStrings = {
     login: [
       'Войдите в свой аккаунт',
       'Эл. почта',
+      'Введите свою почту',
       'Пароль',
+      'Введите свой пароль',
       'Войти',
       'Нет аккаунта?',
       'Создать аккаунт',

@@ -103,7 +103,7 @@ const Login: React.FC<ILoginProps> = () => {
               </label>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={localizationStrings[lang].login[2]}
                 required
                 {...register('email')}
                 className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
@@ -117,11 +117,11 @@ const Login: React.FC<ILoginProps> = () => {
                 htmlFor="password"
                 className="block text-3xl font-medium text-indigo-600 mb-2"
               >
-                {localizationStrings[lang].login[2]}
+                {localizationStrings[lang].login[3]}
               </label>
               <input
                 type="password"
-                placeholder="Enter your password"
+                placeholder={localizationStrings[lang].login[4]}
                 required
                 {...register('password')}
                 className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
@@ -132,16 +132,16 @@ const Login: React.FC<ILoginProps> = () => {
             </div>
             <div className="flex justify-center">
               <CustomButton
-                label={localizationStrings[lang].login[3]}
+                label={localizationStrings[lang].login[5]}
                 type="submit"
                 disabled={!isValid}
               />
             </div>
           </form>
           <div className="flex flex-col gap-4 text-center mt-4 text-2xl">
-            {localizationStrings[lang].login[4]}
+            {localizationStrings[lang].login[6]}
             <CustomButton
-              label={localizationStrings[lang].login[5]}
+              label={localizationStrings[lang].login[7]}
               onClick={() => {
                 navigate('/register');
               }}
