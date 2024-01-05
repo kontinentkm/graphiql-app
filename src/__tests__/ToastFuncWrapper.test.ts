@@ -1,5 +1,3 @@
-import '@testing-library/jest-dom';
-
 import { Localization } from '@src/types/types';
 
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
