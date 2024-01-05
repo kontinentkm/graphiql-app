@@ -14,6 +14,8 @@ import { Localization } from '@src/types/types';
 
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
+import CustomButton from '@src/UI/CustomButton/CustomButton';
+import { prettifyCode } from '@src/utils/prettifyCode';
 import SchemaWindow from '@src/components/SchemaWindow/SchemaWindow';
 
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
@@ -37,7 +39,11 @@ const Main: FC = (): JSX.Element => {
   const sourceRef = useRef<HTMLInputElement | null>(null);
   const source = useRef<string>('');
 
-  const onPrettifyClick = (): void => console.log('prettify');
+  const onPrettifyClick = (): void => {
+    const prettifiedQuery = prettifyCode(query);
+    setQuery(prettifiedQuery);
+  };
+
   const onGetResultsClick = async (): Promise<void> => {
     if (!source.current) {
       toast.warning(toastMessages[lang].empty_source_err_msg, toastSettings);
@@ -100,9 +106,11 @@ const Main: FC = (): JSX.Element => {
   return (
     <div className={styles.main_container}>
       <div className={styles.top_block}>
-        <button className={styles.prettify_btn} onClick={onPrettifyClick}>
-          {localizationStrings[lang].prettify_btn}
-        </button>
+        <CustomButton
+          type="button"
+          label={localizationStrings[lang].prettify_btn}
+          onClick={onPrettifyClick}
+        ></CustomButton>
         <button className={styles.results_btn} onClick={onGetResultsClick}>
           {localizationStrings[lang].results_btn}
         </button>

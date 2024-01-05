@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
 import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+import localizationStrings from '@src/constants/localizationStrings';
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import { useSelector } from 'react-redux';
 import { Localization } from '@src/types/types';
@@ -32,8 +33,6 @@ const schema = yup.object({
 });
 
 const Register: React.FC<IRegisterProps> = () => {
-  const lang: Localization = useSelector(selectLocalization);
-
   const {
     register,
     handleSubmit,
@@ -47,6 +46,7 @@ const Register: React.FC<IRegisterProps> = () => {
 
   const [user, loading] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const lang: Localization = useSelector(selectLocalization);
 
   useEffect(() => {
     trigger();
@@ -73,7 +73,7 @@ const Register: React.FC<IRegisterProps> = () => {
           <>
             <div className="flex flex-col w-96">
               <h2 className="text-4xl font-semibold text-center mb-4">
-                Create your account
+                {localizationStrings[lang].register[0]}
               </h2>
               <form className="space-y-4">
                 <div id="name">
@@ -81,7 +81,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="name"
                     className="block text-3xl font-medium text-indigo-600 mb-2"
                   >
-                    Name
+                    {localizationStrings[lang].register[1]}
                   </label>
                   <input
                     type="name"
@@ -90,7 +90,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     {...register('name')}
                     className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
-                  <p className="text-black font-bold text-xl mt-1 text-red-600">
+                  <p className="font-bold text-xl mt-1 text-red-600">
                     {errors.name?.message}
                   </p>
                 </div>
@@ -99,7 +99,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="email"
                     className="block text-3xl font-medium text-indigo-600 mb-2"
                   >
-                    Email
+                    {localizationStrings[lang].register[2]}
                   </label>
                   <input
                     type="email"
@@ -108,7 +108,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     {...register('email')}
                     className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
-                  <p className="text-black font-bold text-xl mt-1 text-red-600">
+                  <p className="font-bold text-xl mt-1 text-red-600">
                     {errors.email?.message}
                   </p>
                 </div>
@@ -117,7 +117,7 @@ const Register: React.FC<IRegisterProps> = () => {
                     htmlFor="password"
                     className="block text-3xl font-medium text-indigo-600 mb-2"
                   >
-                    Password
+                    {localizationStrings[lang].register[3]}
                   </label>
                   <input
                     type="password"
@@ -126,13 +126,13 @@ const Register: React.FC<IRegisterProps> = () => {
                     {...register('password')}
                     className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
                   />
-                  <p className="text-black font-bold text-xl mt-1 text-red-600">
+                  <p className="font-bold text-xl mt-1 text-red-600">
                     {errors.password?.message}
                   </p>
                 </div>
                 <div className="flex justify-center">
                   <CustomButton
-                    label="Create account"
+                    label={localizationStrings[lang].register[4]}
                     onClick={handleSubmit(createAccount)}
                     type="submit"
                     disabled={!isValid}

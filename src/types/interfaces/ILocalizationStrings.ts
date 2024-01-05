@@ -17,13 +17,13 @@ interface ILocalizationStrings {
     edit_btn_results: string;
     variables_btn: string;
     headers_btn: string;
-
     execute_btn: string;
     query: string;
     variables: string;
     headers: string;
     input: string;
-
+    login: string[];
+    register: string[];
     schema_btn: string;
     no_schema_msg: string;
   };
@@ -45,13 +45,13 @@ interface ILocalizationStrings {
     edit_btn_results: string;
     variables_btn: string;
     headers_btn: string;
-
     execute_btn: string;
     query: string;
     variables: string;
     headers: string;
     input: string;
-
+    login: string[];
+    register: string[];
     schema_btn: string;
     no_schema_msg: string;
   };
