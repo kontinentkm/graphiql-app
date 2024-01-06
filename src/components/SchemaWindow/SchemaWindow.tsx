@@ -1,14 +1,12 @@
-import { FC, Suspense, lazy } from 'react';
+import { FC } from 'react';
 
 import '@src/components/SchemaWindow/SchemaWindow.css';
 
 import ISchemaWindowProps from '@src/types/interfaces/ISchemaWindowProps';
 
-import LoaderSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
+import SchemaView from '@src/components/SchemaView/SchemaView';
 
 import { SCHEMA_WINDOW_TEST_ID } from '@src/__tests__/__mocks__/testIDs';
-
-const SchemaView = lazy(() => import('@src/components/SchemaView/SchemaView'));
 
 const SchemaWindow: FC<ISchemaWindowProps> = ({
   schema,
@@ -22,11 +20,7 @@ const SchemaWindow: FC<ISchemaWindowProps> = ({
       <div className={'button_wrapper'}>
         <button onClick={onCloseClick}>X</button>
       </div>
-      {visible && (
-        <Suspense fallback={<LoaderSpinner />}>
-          <SchemaView schema={schema} />
-        </Suspense>
-      )}
+      <SchemaView schema={schema} />
     </article>
   );
 };
