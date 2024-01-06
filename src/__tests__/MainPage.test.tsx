@@ -32,7 +32,6 @@ describe('Main page', () => {
     ).useSelector.mockReturnValue('en');
 
     render(<Main />);
-    screen.debug();
 
     expect(
       screen.getByText(localizationStrings.en.prettify_btn)
@@ -60,6 +59,44 @@ describe('Main page', () => {
 
     expect(
       screen.getByText(localizationStrings.en.headers_btn)
+    ).toBeInTheDocument();
+
+    jest.clearAllMocks();
+  });
+
+  it('Renders Main page with russian localization', () => {
+    (
+      jest.requireMock('react-redux') as { useSelector: jest.Mock }
+    ).useSelector.mockReturnValue('ru');
+
+    render(<Main />);
+
+    expect(
+      screen.getByText(localizationStrings.ru.prettify_btn)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.ru.results_btn)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.ru.schema_btn)
+    ).toBeInTheDocument();
+
+    expect(screen.getByTestId('suggestions')).toBeInTheDocument();
+
+    expect(screen.getByText(localizationStrings.ru.query)).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.ru.edit_btn_results)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.ru.variables_btn)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.ru.headers_btn)
     ).toBeInTheDocument();
 
     jest.clearAllMocks();

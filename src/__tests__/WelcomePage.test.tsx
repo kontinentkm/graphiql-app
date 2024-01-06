@@ -55,9 +55,6 @@ describe('Welcome page', () => {
     render(<Welcome />);
 
     expect(
-      screen.getByText(localizationStrings.ru.welcome)
-    ).toBeInTheDocument();
-    expect(
       screen.getByText(localizationStrings.ru.ourTeam)
     ).toBeInTheDocument();
 

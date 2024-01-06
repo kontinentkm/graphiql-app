@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Header from '@src/components/Header/Header';
 import '@testing-library/jest-dom';
 import localizationStrings from '@src/constants/localizationStrings';
@@ -14,67 +14,65 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('Header', () => {
-  it('Renders Header page with english localization', () => {
+  it('Renders Header page with english localization', async () => {
     (
       jest.requireMock('react-redux') as { useSelector: jest.Mock }
     ).useSelector.mockReturnValue('en');
 
-    act(() => {
-      render(
-        <Router>
-          <Provider store={store}>
-            <Header />
-          </Provider>
-        </Router>
-      );
+    render(
+      <Router>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
+
+      expect(
+        screen.getByText(localizationStrings.en.welcome)
+      ).toBeInTheDocument();
+
+      expect(
+        screen.getByText(localizationStrings.en.loginBtn)
+      ).toBeInTheDocument();
+
+      const togglerElement = screen.getByTestId('toggler');
+      expect(togglerElement).toBeInTheDocument();
+
+      jest.clearAllMocks();
     });
-    screen.debug();
-
-    expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
-
-    expect(
-      screen.getByText(localizationStrings.en.welcome)
-    ).toBeInTheDocument();
-
-    expect(
-      screen.getByText(localizationStrings.en.loginBtn)
-    ).toBeInTheDocument();
-
-    const togglerElement = screen.getByTestId('toggler');
-    expect(togglerElement).toBeInTheDocument();
-
-    jest.clearAllMocks();
   });
 
-  it('Renders Header page with russian localization', () => {
+  it('Renders Header page with russian localization', async () => {
     (
       jest.requireMock('react-redux') as { useSelector: jest.Mock }
     ).useSelector.mockReturnValue('ru');
 
-    act(() => {
-      render(
-        <Router>
-          <Provider store={store}>
-            <Header />
-          </Provider>
-        </Router>
-      );
+    render(
+      <Router>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
+
+      expect(
+        screen.getByText(localizationStrings.ru.welcome)
+      ).toBeInTheDocument();
+
+      expect(
+        screen.getByText(localizationStrings.ru.loginBtn)
+      ).toBeInTheDocument();
+
+      const togglerElement = screen.getByTestId('toggler');
+      expect(togglerElement).toBeInTheDocument();
+
+      jest.clearAllMocks();
     });
-    screen.debug();
-
-    expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
-
-    expect(
-      screen.getByText(localizationStrings.ru.welcome)
-    ).toBeInTheDocument();
-
-    expect(
-      screen.getByText(localizationStrings.ru.loginBtn)
-    ).toBeInTheDocument();
-
-    const togglerElement = screen.getByTestId('toggler');
-    expect(togglerElement).toBeInTheDocument();
-
-    jest.clearAllMocks();
   });
 });
