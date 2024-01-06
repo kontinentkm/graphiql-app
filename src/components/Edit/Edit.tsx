@@ -9,7 +9,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 
 import IEditProps from '@src/types/interfaces/IEditProps';
 import { Localization } from '@src/types/types';
@@ -42,8 +42,11 @@ const Edit: FC<IEditProps> = ({
     setShowResults(true);
   };
 
-  const handleQueryChange = (editor: CodeMirror.Editor): void =>
-    onQueryChange(editor.getValue());
+  const handleQueryChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onQueryChange(value);
 
   const handleResultChange = (e: ChangeEvent<HTMLTextAreaElement>): void =>
     onResultChange(e.target.value);
@@ -71,7 +74,7 @@ const Edit: FC<IEditProps> = ({
 
       {showQuery && (
         <CodeMirror
-          onUpdate={handleQueryChange}
+          onBeforeChange={handleQueryChange}
           className="edit_block_query"
           value={queryValue}
           options={{

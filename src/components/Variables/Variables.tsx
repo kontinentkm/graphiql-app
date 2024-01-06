@@ -7,7 +7,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import localizationStrings from '@src/constants/localizationStrings';
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import { Localization } from '@src/types/types';
@@ -37,11 +37,17 @@ const Variables: FC<IVariablesProps> = ({
     setShowHeaders(true);
   };
 
-  const handleVariablesChange = (editor: CodeMirror.Editor): void =>
-    onVariablesChange(editor.getValue());
+  const handleVariablesChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onVariablesChange(value);
 
-  const handleHeadersChange = (editor: CodeMirror.Editor): void =>
-    onHeadersChange(editor.getValue());
+  const handleHeadersChange = (
+    editor: CodeMirror.Editor,
+    data: CodeMirror.EditorChange,
+    value: string
+  ): void => onHeadersChange(value);
 
   return (
     <div className="variables_block">
@@ -67,7 +73,7 @@ const Variables: FC<IVariablesProps> = ({
       {showVariables && (
         <CodeMirror
           className="variables_pane font_size"
-          onUpdate={handleVariablesChange}
+          onBeforeChange={handleVariablesChange}
           value={variablesValue}
           options={{
             mode: 'xml',
@@ -79,7 +85,7 @@ const Variables: FC<IVariablesProps> = ({
       {showHeaders && (
         <CodeMirror
           className="font_size"
-          onUpdate={handleHeadersChange}
+          onBeforeChange={handleHeadersChange}
           value={headersValue}
           options={{
             mode: 'xml',
