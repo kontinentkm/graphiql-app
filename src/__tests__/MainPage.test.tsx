@@ -32,7 +32,6 @@ describe('Main page', () => {
     ).useSelector.mockReturnValue('en');
 
     render(<Main />);
-    screen.debug();
 
     expect(
       screen.getByText(localizationStrings.en.prettify_btn)

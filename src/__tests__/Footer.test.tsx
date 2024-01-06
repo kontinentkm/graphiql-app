@@ -26,7 +26,6 @@ describe('Footer', () => {
         </Router>
       );
     });
-    screen.debug();
 
     const link = screen.getByRole('link', {
       name: /rss/i,

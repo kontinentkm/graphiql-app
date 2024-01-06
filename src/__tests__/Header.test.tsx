@@ -1,9 +1,8 @@
-import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Header from '@src/components/Header/Header';
 import '@testing-library/jest-dom';
 import localizationStrings from '@src/constants/localizationStrings';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '@src/store/store';
 import { APP_TITLE } from '@src/constants/global';
@@ -14,21 +13,20 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('Header', () => {
-  it('Renders Header page with english localization', () => {
-    (
-      jest.requireMock('react-redux') as { useSelector: jest.Mock }
-    ).useSelector.mockReturnValue('en');
+  it('Renders Header page with english localization', async () => {
+    await waitFor(() => {
+      (
+        jest.requireMock('react-redux') as { useSelector: jest.Mock }
+      ).useSelector.mockReturnValue('en');
 
-    act(() => {
       render(
-        <Router>
+        <MemoryRouter>
           <Provider store={store}>
             <Header />
           </Provider>
-        </Router>
+        </MemoryRouter>
       );
     });
-    screen.debug();
 
     expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
 
@@ -46,21 +44,20 @@ describe('Header', () => {
     jest.clearAllMocks();
   });
 
-  it('Renders Header page with russian localization', () => {
-    (
-      jest.requireMock('react-redux') as { useSelector: jest.Mock }
-    ).useSelector.mockReturnValue('ru');
+  it('Renders Header page with russian localization', async () => {
+    await waitFor(() => {
+      (
+        jest.requireMock('react-redux') as { useSelector: jest.Mock }
+      ).useSelector.mockReturnValue('ru');
 
-    act(() => {
       render(
-        <Router>
+        <MemoryRouter>
           <Provider store={store}>
             <Header />
           </Provider>
-        </Router>
+        </MemoryRouter>
       );
     });
-    screen.debug();
 
     expect(screen.getByText(APP_TITLE)).toBeInTheDocument();
 

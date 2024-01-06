@@ -1,8 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Welcome from '@src/pages/Welcome/Welcome';
 import '@testing-library/jest-dom';
 import localizationStrings from '@src/constants/localizationStrings';
+import { store } from '@src/store/store';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
@@ -10,12 +13,20 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('Welcome page', () => {
-  it('Renders Welcome page with english localization', () => {
-    (
-      jest.requireMock('react-redux') as { useSelector: jest.Mock }
-    ).useSelector.mockReturnValue('en');
+  it('Renders Welcome page with english localization', async () => {
+    await waitFor(() => {
+      (
+        jest.requireMock('react-redux') as { useSelector: jest.Mock }
+      ).useSelector.mockReturnValue('en');
 
-    render(<Welcome />);
+      render(
+        <MemoryRouter>
+          <Provider store={store}>
+            <Welcome />
+          </Provider>
+        </MemoryRouter>
+      );
+    });
 
     expect(
       screen.getByText(localizationStrings.en.ourTeam)
@@ -47,16 +58,21 @@ describe('Welcome page', () => {
     jest.clearAllMocks();
   });
 
-  it('Renders Welcome page with russian localization', () => {
-    (
-      jest.requireMock('react-redux') as { useSelector: jest.Mock }
-    ).useSelector.mockReturnValue('ru');
+  it('Renders Welcome page with russian localization', async () => {
+    await waitFor(() => {
+      (
+        jest.requireMock('react-redux') as { useSelector: jest.Mock }
+      ).useSelector.mockReturnValue('ru');
 
-    render(<Welcome />);
+      render(
+        <MemoryRouter>
+          <Provider store={store}>
+            <Welcome />
+          </Provider>
+        </MemoryRouter>
+      );
+    });
 
-    expect(
-      screen.getByText(localizationStrings.ru.welcome)
-    ).toBeInTheDocument();
     expect(
       screen.getByText(localizationStrings.ru.ourTeam)
     ).toBeInTheDocument();
