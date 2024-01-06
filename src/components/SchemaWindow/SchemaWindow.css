@@ -1,6 +1,6 @@
 @import url('@src/styles/variables.css');
 
-.wrapper {
+.schema_wrapper {
   position: absolute;
   right: 0;
   top: 0;
@@ -22,7 +22,7 @@
   transform: translateX(0);
 }
 
-.wrapper button {
+.schema_wrapper button {
   font-size: 1.6rem;
 }
 
@@ -34,7 +34,7 @@
   padding: 0 0.65rem;
 }
 
-.wrapper textarea {
+.schema_wrapper textarea {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -43,15 +43,15 @@
   font-size: 1.6rem;
 }
 
-.wrapper ::-webkit-scrollbar {
+.schema_wrapper ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.wrapper ::-webkit-scrollbar-track {
+.schema_wrapper ::-webkit-scrollbar-track {
   background-color: var(--schema-scroll-track-color);
 }
 
-.wrapper ::-webkit-scrollbar-thumb {
+.schema_wrapper ::-webkit-scrollbar-thumb {
   background-color: var(--schema-scroll-thumb-color);
 }
