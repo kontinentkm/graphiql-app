@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useRouteError } from 'react-router-dom';
 
 import styles from '@src/components/Fallback/Fallback.module.css';
 
+import { FALLBACK_TEST_ID } from '@src/__tests__/__mocks__/testIDs';
+
 const FALLBACK_MESSAGE = 'Error occurs!';
 const UNKNOWN_ERROR_MESSAGE = 'Unknown error';
 const BTN_TEXT = 'Reload';
@@ -23,7 +25,7 @@ const Fallback: FC = (): JSX.Element => {
   const onBtnClick = (): void => navigate(location.pathname);
 
   return (
-    <div className={styles.fallback}>
+    <div data-testid={FALLBACK_TEST_ID} className={styles.fallback}>
       <p className={styles.title}>{FALLBACK_MESSAGE}</p>
       <p className={styles.message}>{`Description: ${message}`}</p>
       <button type="button" onClick={onBtnClick}>
