@@ -37,17 +37,11 @@ const Variables: FC<IVariablesProps> = ({
     setShowHeaders(true);
   };
 
-  const handleVariablesChange = (
-    editor: CodeMirror.Editor,
-    data: CodeMirror.EditorChange,
-    value: string
-  ): void => onVariablesChange(value);
+  const handleVariablesChange = (editor: CodeMirror.Editor): void =>
+    onVariablesChange(editor.getValue());
 
-  const handleHeadersChange = (
-    editor: CodeMirror.Editor,
-    data: CodeMirror.EditorChange,
-    value: string
-  ): void => onHeadersChange(value);
+  const handleHeadersChange = (editor: CodeMirror.Editor): void =>
+    onHeadersChange(editor.getValue());
 
   return (
     <div className="variables_block">
@@ -73,7 +67,7 @@ const Variables: FC<IVariablesProps> = ({
       {showVariables && (
         <CodeMirror
           className="variables_pane font_size"
-          onChange={handleVariablesChange}
+          onUpdate={handleVariablesChange}
           value={variablesValue}
           options={{
             mode: 'xml',
@@ -85,7 +79,7 @@ const Variables: FC<IVariablesProps> = ({
       {showHeaders && (
         <CodeMirror
           className="font_size"
-          onChange={handleHeadersChange}
+          onUpdate={handleHeadersChange}
           value={headersValue}
           options={{
             mode: 'xml',

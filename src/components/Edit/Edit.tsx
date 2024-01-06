@@ -42,11 +42,8 @@ const Edit: FC<IEditProps> = ({
     setShowResults(true);
   };
 
-  const handleQueryChange = (
-    editor: CodeMirror.Editor,
-    data: CodeMirror.EditorChange,
-    value: string
-  ): void => onQueryChange(value);
+  const handleQueryChange = (editor: CodeMirror.Editor): void =>
+    onQueryChange(editor.getValue());
 
   const handleResultChange = (e: ChangeEvent<HTMLTextAreaElement>): void =>
     onResultChange(e.target.value);
@@ -74,8 +71,8 @@ const Edit: FC<IEditProps> = ({
 
       {showQuery && (
         <CodeMirror
+          onUpdate={handleQueryChange}
           className="edit_block_query"
-          onChange={handleQueryChange}
           value={queryValue}
           options={{
             mode: 'xml',
