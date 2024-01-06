@@ -13,7 +13,6 @@ import { Localization } from '@src/types/types';
 
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
-import CustomButton from '@src/UI/CustomButton/CustomButton';
 import { prettifyCode } from '@src/utils/prettifyCode';
 import SchemaWindow from '@src/components/SchemaWindow/SchemaWindow';
 
@@ -105,11 +104,9 @@ const Main: FC = (): JSX.Element => {
   return (
     <div className={styles.main_container}>
       <div className={styles.top_block}>
-        <CustomButton
-          type="button"
-          label={localizationStrings[lang].prettify_btn}
-          onClick={onPrettifyClick}
-        ></CustomButton>
+        <button className={styles.results_btn} onClick={onPrettifyClick}>
+          {localizationStrings[lang].prettify_btn}
+        </button>
         <button className={styles.results_btn} onClick={onGetResultsClick}>
           {localizationStrings[lang].results_btn}
         </button>
