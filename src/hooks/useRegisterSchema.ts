@@ -10,7 +10,9 @@ import { getLoginSchema } from '@src/hooks/useLoginSchema';
 
 import { registerMessages } from '@src/constants/localizationStrings';
 
-const getRegisterSchema = (lang: Localization): ObjectSchema<IRegisterInputs> =>
+export const getRegisterSchema = (
+  lang: Localization
+): ObjectSchema<IRegisterInputs> =>
   yup
     .object({
       name: yup.string().required(registerMessages[lang].empty_name_msg),
