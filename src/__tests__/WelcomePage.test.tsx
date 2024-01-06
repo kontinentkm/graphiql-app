@@ -1,11 +1,12 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import Welcome from '@src/pages/Welcome/Welcome';
 import '@testing-library/jest-dom';
-import localizationStrings from '@src/constants/localizationStrings';
-import { store } from '@src/store/store';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+
+import Welcome from '@src/pages/Welcome/Welcome';
+import { store } from '@src/store/store';
+
+import localizationStrings from '@src/constants/localizationStrings';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),

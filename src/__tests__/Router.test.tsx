@@ -1,13 +1,15 @@
-import Fallback from '@src/components/Fallback/Fallback';
-import Layout from '@src/components/Layout/Layout';
-import NotFound from '@src/pages/NotFound/NotFound';
-import useCustomRouter from '@src/router/Router';
-import { privateRoutes } from '@src/router/routes';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
+
+import Fallback from '@src/components/Fallback/Fallback';
+import Layout from '@src/components/Layout/Layout';
+import NotFound from '@src/pages/NotFound/NotFound';
+
+import useCustomRouter from '@src/router/Router';
+import { privateRoutes } from '@src/router/routes';
 
 const fakeUser = { name: 'John' };
 

@@ -24,10 +24,6 @@ test(`Fallback is in the document`, async (): Promise<void> => {
   );
 
   await waitFor(() => {
-    (
-      jest.requireMock('react-redux') as { useSelector: jest.Mock }
-    ).useSelector.mockReturnValue('en');
-
     render(
       <Provider store={store}>
         <RouterProvider router={router} />

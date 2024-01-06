@@ -1,10 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Header from '@src/components/Header/Header';
 import '@testing-library/jest-dom';
-import localizationStrings from '@src/constants/localizationStrings';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+import Header from '@src/components/Header/Header';
 import { store } from '@src/store/store';
+
+import localizationStrings from '@src/constants/localizationStrings';
 import { APP_TITLE } from '@src/constants/global';
 
 jest.mock('react-redux', () => ({
