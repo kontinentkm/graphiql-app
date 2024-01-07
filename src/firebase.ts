@@ -56,9 +56,13 @@ const logout = async (): Promise<void> => {
   }
 };
 
-const login = async (email: string, password: string): Promise<void> => {
+const login = async (
+  email: string,
+  password: string
+): Promise<{ user: { uid: string } }> => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    return { user: { uid: 'some-uid' } };
   } catch (error) {
     throw new LocalizedError({
       en: toastMessages.en.login_error_msg,

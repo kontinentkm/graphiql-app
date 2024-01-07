@@ -1,5 +1,5 @@
 import Register from '@src/pages/Register/Register';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '@src/store/store';
 import { MemoryRouter } from 'react-router-dom';
@@ -23,15 +23,17 @@ describe('<Register />', () => {
   });
 
   it('should display a success message after registration', () => {
-    render(
-      <>
-        <Provider store={store}>
-          <MemoryRouter>
-            <Register />
-          </MemoryRouter>
-        </Provider>
-      </>
-    );
+    act(() => {
+      render(
+        <>
+          <Provider store={store}>
+            <MemoryRouter>
+              <Register />
+            </MemoryRouter>
+          </Provider>
+        </>
+      );
+    });
 
     const successMessage = screen.getByText(
       'You have successfully logged in as'

@@ -62,6 +62,7 @@ const Login: React.FC<ILoginProps> = () => {
   }, [setValue, trigger, register]);
 
   const signIn = async (data: ILoginInputs) => {
+    console.log('Received arguments:', data.email, data.password);
     toastFuncWrapper(
       login,
       toastMessages[lang].loading_msg,
@@ -93,7 +94,11 @@ const Login: React.FC<ILoginProps> = () => {
           <h2 className="text-4xl font-semibold text-center mb-4">
             {localizationStrings[lang]?.login?.[0] || 'Enter your credentials'}
           </h2>
-          <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
+          <form
+            className="space-y-4"
+            role="form"
+            onSubmit={(e) => handleSubmit(signIn)(e)}
+          >
             <label
               htmlFor="email"
               className="block text-3xl font-medium text-indigo-600 mb-2"
