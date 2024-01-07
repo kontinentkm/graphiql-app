@@ -2,6 +2,10 @@
 
 GraphiQL App is a powerful GraphQL playground and IDE developed by a collaborative team of three skilled developers. This application offers advanced features such as robust authorization, authentication capabilities, and the flexibility to work with any specified open GraphQL endpoint.
 
+## Install
+
+To run the project use "npm install --force".
+
 ## Technologies Used
 
 - **React 18**: The application leverages the latest version of React to ensure modern and efficient user interfaces.
