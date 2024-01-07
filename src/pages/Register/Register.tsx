@@ -62,79 +62,80 @@ const Register: React.FC<IRegisterProps> = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-center items-center mt-20 mx-auto p-5 rounded">
-        <div className="flex flex-col w-96">
-          <h2 className="text-4xl font-semibold text-center mb-4">
-            {localizationStrings[lang].register[0]}
-          </h2>
-          <form className="space-y-4">
-            <div id="name">
-              <label
-                htmlFor="name"
-                className="block text-3xl font-medium text-indigo-600 mb-2"
-              >
-                {localizationStrings[lang].register[1]}
-              </label>
-              <input
-                type="name"
-                placeholder="Enter your name"
-                required
-                {...register('name')}
-                className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-              />
-              <p className="font-bold text-xl mt-1 text-red-600">
-                {messages.name}
-              </p>
-            </div>
-            <div id="email">
-              <label
-                htmlFor="email"
-                className="block text-3xl font-medium text-indigo-600 mb-2"
-              >
-                {localizationStrings[lang].register[2]}
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                {...register('email')}
-                className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-              />
-              <p className="font-bold text-xl mt-1 text-red-600">
-                {messages.email}
-              </p>
-            </div>
-            <div id="password">
-              <label
-                htmlFor="password"
-                className="block text-3xl font-medium text-indigo-600 mb-2"
-              >
-                {localizationStrings[lang].register[3]}
-              </label>
-              <input
-                type="password"
-                placeholder="Enter you password"
-                required
-                {...register('password')}
-                className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-              />
-              <p className="font-bold text-xl mt-1 text-red-600">
-                {messages.password}
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <CustomButton
-                label={localizationStrings[lang].register[4]}
-                onClick={handleSubmit(createAccount)}
-                type="submit"
-                disabled={!isValid}
-              />
-            </div>
-          </form>
-        </div>
+    <div className="flex justify-center items-center mt-20 mx-auto p-5 rounded">
+      <div className="flex flex-col w-96">
+        <h2 className="text-4xl font-semibold text-center mb-4">
+          {localizationStrings[lang].register[0]}
+        </h2>
+        <form className="space-y-4">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[1]}
+            </label>
+            <input
+              type="name"
+              placeholder={localizationStrings[lang].register[2]}
+              required
+              {...register('name')}
+              id="name"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.name}
+            </p>
+          </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[3]}
+            </label>
+            <input
+              type="email"
+              placeholder={localizationStrings[lang].register[4]}
+              required
+              {...register('email')}
+              id="email"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.email}
+            </p>
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[5]}
+            </label>
+            <input
+              type="password"
+              placeholder={localizationStrings[lang].register[6]}
+              required
+              {...register('password')}
+              id="password"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.password}
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <CustomButton
+              label={localizationStrings[lang].register[7]}
+              onClick={handleSubmit(createAccount)}
+              type="submit"
+              disabled={!isValid}
+            />
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

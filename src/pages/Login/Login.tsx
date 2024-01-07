@@ -68,7 +68,7 @@ const Login: React.FC<ILoginProps> = () => {
           {localizationStrings[lang].login[0]}
         </h2>
         <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
-          <div id="email" className="mb-8">
+          <div className="mb-8">
             <label
               htmlFor="email"
               className="block text-3xl font-medium text-indigo-600 mb-2"
@@ -77,16 +77,17 @@ const Login: React.FC<ILoginProps> = () => {
             </label>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={localizationStrings[lang].login[1]}
               required
               {...register('email')}
+              id="email"
               className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
             />
             <p className="font-bold text-xl mt-1 text-red-600">
               {messages.email}
             </p>
           </div>
-          <div id="password" className="mb-8">
+          <div className="mb-8">
             <label
               htmlFor="password"
               className="block text-3xl font-medium text-indigo-600 mb-2"
@@ -95,9 +96,10 @@ const Login: React.FC<ILoginProps> = () => {
             </label>
             <input
               type="password"
-              placeholder="Enter your password"
+              placeholder={localizationStrings[lang].login[2]}
               required
               {...register('password')}
+              id="password"
               className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
             />
             <p className="font-bold text-xl mt-1 text-red-600">

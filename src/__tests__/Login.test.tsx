@@ -1,4 +1,4 @@
-import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -9,29 +9,7 @@ import { store } from '@src/store/store';
 
 import localizationStrings from '@src/constants/localizationStrings';
 
-jest.mock('@src/firebase', () => ({
-  ...jest.requireActual('@src/firebase'),
-  login: jest.fn(),
-  auth: jest.fn(),
-}));
-
-jest.mock('react-firebase-hooks/auth', () => ({
-  useAuthState: jest.fn(() => [null, false, null]),
-}));
-
 describe('<Login />', () => {
-  beforeEach(() => {
-    jest.mock('@src/firebase', () => ({
-      ...jest.requireActual('@src/firebase'),
-      auth: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    cleanup();
-    jest.clearAllMocks();
-  });
-
   it('renders the Login component with necessary elements', async () => {
     await waitFor(() => {
       render(
@@ -45,9 +23,11 @@ describe('<Login />', () => {
       );
     });
 
-    expect(screen.getByPlaceholderText('Enter your email')).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText('Enter your password')
+      screen.getByPlaceholderText(localizationStrings.en.login[1])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(localizationStrings.en.login[2])
     ).toBeInTheDocument();
 
     expect(
