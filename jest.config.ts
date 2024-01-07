@@ -8,7 +8,7 @@ const config: Config = {
   preset: 'ts-jest',
   modulePaths: ['<rootDir>'],
   moduleNameMapper: {
-    '.+\\.(css|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '.+\\.(css|scss|png|jpg|svg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^@src(.*)$': '<rootDir>/src$1',
   },
   modulePathIgnorePatterns: ['__mocks__', 'types'],
