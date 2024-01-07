@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -33,15 +33,17 @@ describe('<Login />', () => {
   });
 
   it('renders the Login component with necessary elements', async () => {
-    render(
-      <>
-        <Provider store={store}>
-          <MemoryRouter>
-            <Login />
-          </MemoryRouter>
-        </Provider>
-      </>
-    );
+    await waitFor(() => {
+      render(
+        <>
+          <Provider store={store}>
+            <MemoryRouter>
+              <Login />
+            </MemoryRouter>
+          </Provider>
+        </>
+      );
+    });
 
     expect(screen.getByPlaceholderText('Enter your email')).toBeInTheDocument();
     expect(
