@@ -1,4 +1,6 @@
 import ILocalizationStrings from '@src/types/interfaces/ILocalizationStrings';
+import ILoginMessages from '@src/types/interfaces/ILoginMessages';
+import IRegisterMessages from '@src/types/interfaces/IRegisterMessages';
 import IToastMessages from '@src/types/interfaces/IToastMessages';
 
 export const toastMessages: IToastMessages = {
@@ -40,6 +42,34 @@ export const toastMessages: IToastMessages = {
 
     empty_source_err_msg:
       'Чтобы делать запросы вы должны ввести url-адрес API!',
+  },
+};
+
+export const loginMessages: ILoginMessages = {
+  en: {
+    email_required_msg: 'Your email is required',
+    email_mismatch_msg: 'You must enter valid email',
+    password_empty_msg: 'You must enter password',
+    password_length_msg: 'Password must contain 8-32 symbols',
+    password_mismatch_msg:
+      'Password must contain at least one number, one uppercase letter, one lowercase letter, and one special character',
+  },
+  ru: {
+    email_required_msg: 'Введите адрес эл. почты',
+    email_mismatch_msg: 'Адресс эл. почты должен быть валидным',
+    password_empty_msg: 'Введите пароль',
+    password_length_msg: 'Пароль должен содержать 8-32 символов',
+    password_mismatch_msg:
+      'Пароль должен содержать хотя бы одну цифру, одну букву в верхнем регистре, одну в нижнем регистре, специальный символ и быть не короче 8 символов',
+  },
+};
+
+export const registerMessages: IRegisterMessages = {
+  en: {
+    empty_name_msg: 'You must enter your name',
+  },
+  ru: {
+    empty_name_msg: 'Введите ваше имя',
   },
 };
 
@@ -96,9 +126,7 @@ const localizationStrings: ILocalizationStrings = {
     login: [
       'Enter your credentials',
       'Email',
-      'Enter your email',
       'Password',
-      'Enter your password',
       'Login',
       `Don't have an account?`,
       'Create account',
@@ -167,9 +195,7 @@ const localizationStrings: ILocalizationStrings = {
     login: [
       'Войдите в свой аккаунт',
       'Эл. почта',
-      'Введите свою почту',
       'Пароль',
-      'Введите свой пароль',
       'Войти',
       'Нет аккаунта?',
       'Создать аккаунт',

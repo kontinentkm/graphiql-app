@@ -1,7 +1,8 @@
-import { FC, useRef, useState } from 'react';
+import { FC, lazy, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { GraphQLSchema } from 'graphql';
+import { toast } from 'react-toastify';
 
 import styles from '@src/pages/Main/Main.module.css';
 
@@ -14,15 +15,18 @@ import { Localization } from '@src/types/types';
 import Edit from '@src/components/Edit/Edit';
 import Variables from '@src/components/Variables/Variables';
 import { prettifyCode } from '@src/utils/prettifyCode';
-import SchemaWindow from '@src/components/SchemaWindow/SchemaWindow';
 
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import getData from '@src/services/ApiDataService';
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
+import getSchema from '@src/services/ApiSchemaService';
 
 import defaultAPIsUrl from '@src/constants/defaultAPIsURL';
-import getSchema from '@src/services/ApiSchemaService';
-import { toast } from 'react-toastify';
+import { toastSettings } from '@src/constants/toastSettings';
+
+const SchemaWindow = lazy(
+  () => import('@src/components/SchemaWindow/SchemaWindow')
+);
 
 const Main: FC = (): JSX.Element => {
   const lang: Localization = useSelector(selectLocalization);
@@ -44,7 +48,7 @@ const Main: FC = (): JSX.Element => {
 
   const onGetResultsClick = async (): Promise<void> => {
     if (!source.current) {
-      toast.warning(toastMessages[lang].empty_source_err_msg);
+      toast.warning(toastMessages[lang].empty_source_err_msg, toastSettings);
       return;
     }
 
@@ -71,7 +75,7 @@ const Main: FC = (): JSX.Element => {
     if (newSource === source.current) return;
 
     if (!newSource) {
-      toast.warning(toastMessages[lang].empty_source_err_msg);
+      toast.warning(toastMessages[lang].empty_source_err_msg, toastSettings);
       setSchema(null);
       source.current = newSource;
       return;
@@ -110,7 +114,11 @@ const Main: FC = (): JSX.Element => {
         <button className={styles.results_btn} onClick={onGetResultsClick}>
           {localizationStrings[lang].results_btn}
         </button>
-        <button className={styles.results_btn} onClick={onSchemaBtnClick}>
+        <button
+          disabled={!schema}
+          className={styles.results_btn}
+          onClick={onSchemaBtnClick}
+        >
           {localizationStrings[lang].schema_btn}
         </button>
         <div className={styles.input_block}>
@@ -149,11 +157,13 @@ const Main: FC = (): JSX.Element => {
         onVariablesChange={setVariables}
         onHeadersChange={setHeaders}
       />
-      <SchemaWindow
-        schema={schema}
-        visible={schemaVisibility}
-        onCloseClick={onSchemaBtnClick}
-      />
+      {!!schema && (
+        <SchemaWindow
+          schema={schema}
+          visible={schemaVisibility}
+          onCloseClick={onSchemaBtnClick}
+        />
+      )}
     </div>
   );
 };

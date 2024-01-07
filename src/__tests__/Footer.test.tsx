@@ -1,8 +1,8 @@
-import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
 import { store } from '@src/store/store';
 import Footer from '@src/components/Footer/Footer';
 

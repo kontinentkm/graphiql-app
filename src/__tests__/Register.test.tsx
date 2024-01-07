@@ -1,29 +1,17 @@
-import Register from '@src/pages/Register/Register';
-import { render, screen, cleanup, act } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '@src/store/store';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom/';
 
-jest.mock('react-firebase-hooks/auth', () => ({
-  useAuthState: jest.fn(() => [{}, false, null]),
-}));
+import Register from '@src/pages/Register/Register';
+
+import { store } from '@src/store/store';
+
+import localizationStrings from '@src/constants/localizationStrings';
 
 describe('<Register />', () => {
-  beforeEach(() => {
-    jest.mock('@src/firebase', () => ({
-      ...jest.requireActual('@src/firebase'),
-      auth: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    cleanup();
-    jest.clearAllMocks();
-  });
-
-  it('should display a success message after registration', () => {
-    act(() => {
+  it('renders the Register component with necessary elements', async () => {
+    await waitFor(() => {
       render(
         <>
           <Provider store={store}>
@@ -35,9 +23,18 @@ describe('<Register />', () => {
       );
     });
 
-    const successMessage = screen.getByText(
-      'You have successfully logged in as'
-    );
-    expect(successMessage).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(localizationStrings.en.register[2])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(localizationStrings.en.register[4])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(localizationStrings.en.register[6])
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(localizationStrings.en.register[7])
+    ).toBeInTheDocument();
   });
 });

@@ -1,7 +1,8 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Main from '@src/pages/Main/Main';
 import '@testing-library/jest-dom';
+
+import Main from '@src/pages/Main/Main';
+
 import localizationStrings from '@src/constants/localizationStrings';
 
 document.createRange = () => {

@@ -9,7 +9,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 
 import IEditProps from '@src/types/interfaces/IEditProps';
 import { Localization } from '@src/types/types';
@@ -74,8 +74,8 @@ const Edit: FC<IEditProps> = ({
 
       {showQuery && (
         <CodeMirror
+          onBeforeChange={handleQueryChange}
           className="edit_block_query"
-          onChange={handleQueryChange}
           value={queryValue}
           options={{
             mode: 'xml',

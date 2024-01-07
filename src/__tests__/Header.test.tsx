@@ -1,11 +1,12 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import Header from '@src/components/Header/Header';
 import '@testing-library/jest-dom';
-import localizationStrings from '@src/constants/localizationStrings';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+import Header from '@src/components/Header/Header';
 import { store } from '@src/store/store';
+
+import localizationStrings from '@src/constants/localizationStrings';
 import { APP_TITLE } from '@src/constants/global';
 
 jest.mock('react-redux', () => ({
@@ -20,11 +21,11 @@ describe('Header', () => {
     ).useSelector.mockReturnValue('en');
 
     render(
-      <Router>
+      <MemoryRouter>
         <Provider store={store}>
           <Header />
         </Provider>
-      </Router>
+      </MemoryRouter>
     );
 
     await waitFor(() => {
@@ -51,11 +52,11 @@ describe('Header', () => {
     ).useSelector.mockReturnValue('ru');
 
     render(
-      <Router>
+      <MemoryRouter>
         <Provider store={store}>
           <Header />
         </Provider>
-      </Router>
+      </MemoryRouter>
     );
 
     await waitFor(() => {

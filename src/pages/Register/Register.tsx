@@ -1,57 +1,53 @@
-import CustomButton from '@src/UI/CustomButton/CustomButton';
-import { ReactNode, useState, useEffect } from 'react';
-import { registerWithEmailAndPassword, auth } from '@src/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
-import LoadingSpinner from '@src/UI/LoadingSpinner/LoadingSpinner';
-import localizationStrings from '@src/constants/localizationStrings';
-import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import { useState, useEffect } from 'react';
+import { registerWithEmailAndPassword } from '@src/firebase';
+import { UseFormReturn } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+
+import CustomButton from '@src/UI/CustomButton/CustomButton';
+
+import { IRegisterInputs } from '@src/types/interfaces/IRegisterInputs';
 import { Localization } from '@src/types/types';
+import IRegisterProps from '@src/types/interfaces/IRegisterProps';
+
+import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
+import useRegisterSchema from '@src/hooks/useRegisterSchema';
 import toastFuncWrapper from '@src/utils/ToastFuncWrapper';
+
+import localizationStrings from '@src/constants/localizationStrings';
 import { toastMessages } from '@src/constants/localizationStrings';
 
-interface IRegisterProps {
-  children?: ReactNode;
-}
-
-const schema = yup.object({
-  name: yup.string().required('Your name is required'),
-  email: yup.string().required('Your email is required'),
-  password: yup
-    .string()
-    .min(8)
-    .max(32)
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$/,
-      'Password must contain at least one number, one uppercase letter, one lowercase letter, and one special character'
-    )
-    .required('Password is required'),
-});
-
 const Register: React.FC<IRegisterProps> = () => {
+  const lang: Localization = useSelector(selectLocalization);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     setValue,
     trigger,
-  } = useForm<IRegisterInputs>({
-    resolver: yupResolver(schema),
-    mode: 'onBlur',
-  });
+  }: UseFormReturn<IRegisterInputs> = useRegisterSchema(lang);
 
-  const [user, loading] = useAuthState(auth);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const lang: Localization = useSelector(selectLocalization);
+  const [messages, setMessages] = useState({
+    email: errors.email?.message,
+    password: errors.password?.message,
+    name: errors.name?.message,
+  });
 
   useEffect(() => {
     trigger();
-    setErrorMessage(null);
-  }, [setValue, trigger, errorMessage]);
+    setMessages({
+      email: errors.email?.message,
+      password: errors.password?.message,
+      name: errors.name?.message,
+    });
+  }, [
+    setValue,
+    trigger,
+    errors.email?.message,
+    errors.password?.message,
+    errors.name?.message,
+    lang,
+  ]);
 
   const createAccount = async (data: IRegisterInputs) => {
     toastFuncWrapper(
@@ -66,85 +62,80 @@ const Register: React.FC<IRegisterProps> = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-center items-center mt-20 mx-auto p-5 rounded">
-        {loading && <LoadingSpinner />}
-        {!user ? (
-          <>
-            <div className="flex flex-col w-96">
-              <h2 className="text-4xl font-semibold text-center mb-4">
-                {localizationStrings[lang].register[0]}
-              </h2>
-              <form className="space-y-4">
-                <label
-                  htmlFor="name"
-                  className="block text-3xl font-medium text-indigo-600 mb-2"
-                >
-                  {localizationStrings[lang].register[1]}
-                </label>
-                <input
-                  type="name"
-                  placeholder={localizationStrings[lang].register[2]}
-                  required
-                  {...register('name')}
-                  id="name"
-                  className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-                />
-                <p className="font-bold text-xl mt-1 text-red-600">
-                  {errors.name?.message}
-                </p>
-                <label
-                  htmlFor="email"
-                  className="block text-3xl font-medium text-indigo-600 mb-2"
-                >
-                  {localizationStrings[lang].register[3]}
-                </label>
-                <input
-                  type="email"
-                  placeholder={localizationStrings[lang].register[4]}
-                  required
-                  {...register('email')}
-                  id="email"
-                  className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-                />
-                <p className="font-bold text-xl mt-1 text-red-600">
-                  {errors.email?.message}
-                </p>
-                <label
-                  htmlFor="password"
-                  className="block text-3xl font-medium text-indigo-600 mb-2"
-                >
-                  {localizationStrings[lang].register[5]}
-                </label>
-                <input
-                  type="password"
-                  placeholder={localizationStrings[lang].register[6]}
-                  required
-                  {...register('password')}
-                  id="password"
-                  className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-                />
-                <p className="font-bold text-xl mt-1 text-red-600">
-                  {errors.password?.message}
-                </p>
-                <div className="flex justify-center">
-                  <CustomButton
-                    label={localizationStrings[lang].register[7]}
-                    onClick={handleSubmit(createAccount)}
-                    type="submit"
-                    disabled={!isValid}
-                  />
-                </div>
-              </form>
-            </div>
-          </>
-        ) : (
-          <div className="text-center">
-            <h2>You have successfully logged in as {user.email}</h2>
+    <div className="flex justify-center items-center mt-20 mx-auto p-5 rounded">
+      <div className="flex flex-col w-96">
+        <h2 className="text-4xl font-semibold text-center mb-4">
+          {localizationStrings[lang].register[0]}
+        </h2>
+        <form className="space-y-4">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[1]}
+            </label>
+            <input
+              type="name"
+              placeholder={localizationStrings[lang].register[2]}
+              required
+              {...register('name')}
+              id="name"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.name}
+            </p>
           </div>
-        )}
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[3]}
+            </label>
+            <input
+              type="email"
+              placeholder={localizationStrings[lang].register[4]}
+              required
+              {...register('email')}
+              id="email"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.email}
+            </p>
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang].register[5]}
+            </label>
+            <input
+              type="password"
+              placeholder={localizationStrings[lang].register[6]}
+              required
+              {...register('password')}
+              id="password"
+              className="mt-1 p-2 text-2xl w-full border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {messages.password}
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <CustomButton
+              label={localizationStrings[lang].register[7]}
+              onClick={handleSubmit(createAccount)}
+              type="submit"
+              disabled={!isValid}
+            />
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

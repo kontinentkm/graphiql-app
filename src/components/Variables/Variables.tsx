@@ -7,7 +7,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import localizationStrings from '@src/constants/localizationStrings';
 import { selectLocalization } from '@src/store/LocalizationSlice/LocalizationSlice';
 import { Localization } from '@src/types/types';
@@ -73,7 +73,7 @@ const Variables: FC<IVariablesProps> = ({
       {showVariables && (
         <CodeMirror
           className="variables_pane font_size"
-          onChange={handleVariablesChange}
+          onBeforeChange={handleVariablesChange}
           value={variablesValue}
           options={{
             mode: 'xml',
@@ -85,7 +85,7 @@ const Variables: FC<IVariablesProps> = ({
       {showHeaders && (
         <CodeMirror
           className="font_size"
-          onChange={handleHeadersChange}
+          onBeforeChange={handleHeadersChange}
           value={headersValue}
           options={{
             mode: 'xml',
