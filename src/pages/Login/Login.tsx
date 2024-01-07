@@ -62,6 +62,7 @@ const Login: React.FC<ILoginProps> = () => {
   }, [setValue, trigger, register]);
 
   const signIn = async (data: ILoginInputs) => {
+    console.log('Received arguments:', data.email, data.password);
     toastFuncWrapper(
       login,
       toastMessages[lang].loading_msg,
@@ -91,57 +92,63 @@ const Login: React.FC<ILoginProps> = () => {
       {!user ? (
         <div className="w-96">
           <h2 className="text-4xl font-semibold text-center mb-4">
-            {localizationStrings[lang].login[0]}
+            {localizationStrings[lang]?.login?.[0] || 'Enter your credentials'}
           </h2>
-          <form className="space-y-4" onSubmit={handleSubmit(signIn)}>
-            <div id="email" className="mb-8">
-              <label
-                htmlFor="email"
-                className="block text-3xl font-medium text-indigo-600 mb-2"
-              >
-                {localizationStrings[lang].login[1]}
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                {...register('email')}
-                className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-              />
-              <p className="font-bold text-xl mt-1 text-red-600">
-                {errors.email?.message}
-              </p>
-            </div>
-            <div id="password" className="mb-8">
-              <label
-                htmlFor="password"
-                className="block text-3xl font-medium text-indigo-600 mb-2"
-              >
-                {localizationStrings[lang].login[2]}
-              </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                required
-                {...register('password')}
-                className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
-              />
-              <p className="font-bold text-xl mt-1 text-red-600">
-                {errors.password?.message}
-              </p>
-            </div>
+          <form
+            className="space-y-4"
+            role="form"
+            onSubmit={(e) => handleSubmit(signIn)(e)}
+          >
+            <label
+              htmlFor="email"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang]?.login?.[1] || 'Email'}
+            </label>
+            <input
+              type="email"
+              placeholder={
+                localizationStrings[lang]?.login?.[2] || 'Enter your email'
+              }
+              required
+              {...register('email')}
+              id="email"
+              className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {errors.email?.message}
+            </p>
+            <label
+              htmlFor="password"
+              className="block text-3xl font-medium text-indigo-600 mb-2"
+            >
+              {localizationStrings[lang]?.login?.[3] || 'Password'}
+            </label>
+            <input
+              type="password"
+              placeholder={
+                localizationStrings[lang]?.login?.[4] || 'Enter your password'
+              }
+              required
+              {...register('password')}
+              id="password"
+              className="mt-1 p-2 w-full text-2xl border rounded-md focus:outline-none focus:border-blue-500 text-indigo-600"
+            />
+            <p className="font-bold text-xl mt-1 text-red-600">
+              {errors.password?.message}
+            </p>
             <div className="flex justify-center">
               <CustomButton
-                label={localizationStrings[lang].login[3]}
+                label={localizationStrings[lang]?.login?.[5] || 'Login'}
                 type="submit"
                 disabled={!isValid}
               />
             </div>
           </form>
           <div className="flex flex-col gap-4 text-center mt-4 text-2xl">
-            {localizationStrings[lang].login[4]}
+            {localizationStrings[lang]?.login?.[6] || 'Don`t have an account?'}
             <CustomButton
-              label={localizationStrings[lang].login[5]}
+              label={localizationStrings[lang]?.login?.[7] || 'Create account'}
               onClick={() => {
                 navigate('/register');
               }}
