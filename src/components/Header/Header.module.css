@@ -1,0 +1,74 @@
+@import url('@src/styles/variables.css');
+
+.header {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  background-color: var(--header-bg-color);
+  transition: all 0.4s ease;
+  z-index: 1000;
+  height: var(--header-height);
+}
+
+.header.scroll {
+  background-color: var(--header-onScroll-bg);
+}
+
+.header * {
+  position: relative;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header a {
+  font-size: 2rem;
+}
+
+.header button {
+  font-size: 1.8rem;
+}
+
+.navigation {
+  display: flex;
+  gap: 2rem;
+}
+
+.title {
+  margin-right: auto;
+  font-size: 3rem;
+  text-wrap: nowrap;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 570px){
+  .wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header {
+    height: var(--header-less500px-height);
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: center;
+  }
+}

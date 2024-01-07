@@ -1,0 +1,43 @@
+:root {
+  --img-height: 3.5rem;
+}
+
+.footer {
+  width: 100%;
+}
+
+.footer img {
+  display: block;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rss {
+  height: var(--img-height);
+}
+
+.githubs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.github {
+  height: var(--img-height);
+}
+
+.year {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.footer a {
+  transition: all 0.3s ease-in-out;
+}
+
+.footer a:hover {
+  filter: invert();
+}

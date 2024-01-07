@@ -1,0 +1,21 @@
+@import url('@src/styles/variables.css');
+
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  padding: 1rem 1.5rem;
+}
+
+.main {
+  width: 100%;
+  flex-grow: 1;
+
+  margin-top: var(--header-height);
+}
+
+@media screen and (max-width: 570px){
+  .main {
+    margin-top: var(--header-less500px-height);
+  }
+}
